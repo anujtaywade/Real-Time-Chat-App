@@ -7,7 +7,7 @@ exports.signup = async (req,res) => {
     try {
         const {name, email, password} = req.body
 
-    if(!name, !email, !password){
+    if(!name || !email || !password){
         return res.status(400).json({message:"All the feilds are mandatory"})
     }
 
@@ -36,27 +36,50 @@ exports.signup = async (req,res) => {
 exports.login = async (req,res) => {
     try {
         const {email,password} = req.body;
-    if (!email , !password){
-        res.status(201).json({message : "above fields are required"})
+        console.log(req.body)
+    if (!email || !password){
+        return res.status(201).json({message : "above fields are required"})
+    }
 
-    const user = await user.findOne({email,password})
-    if(!email ){
+    const existingUser = await user.findOne({email})
+    if(!existingUser ){
         return res.status(201).json({message : "user not found"})
     }
-    const isMatch = bcrypt.compare(password,user.password)
+    const isMatch =await bcrypt.compare(password,existingUser.password)
     if(!isMatch){
         return res.status(401).json({message : "password does not match"})
     } 
 
     if(isMatch){
-        
-    }
+        const token = jwt.sign(
+            {id:existingUser._id, email: existingUser.email},
+            process.env.JWT_SECRET,
+            {expiresIn: process.env.JWT_EXPIRES}
+        )
+        res.status(201).json({message : "login successful",
+            token,
+             user:{
+                id:existingUser._id,
+                email:existingUser.email,
+                name:existingUser.name
+            }
+        })
+    
 
     }
 
     } catch (error) {
-        
+        console.log(error)
+        res.status(201).json({message:"unable to login"})
     }
-
-
 } 
+
+exports.logout=async (req,res) => {
+    try {
+        res.status(401).json({message:"logout successful"})
+
+    } catch (error) {
+        console.log(error)
+        res.status(201).json({message:"server error"})
+    }
+}
