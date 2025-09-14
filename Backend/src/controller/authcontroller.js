@@ -32,3 +32,31 @@ exports.signup = async (req,res) => {
         res.status(201).json({message : "server error"})
     } 
 }
+
+exports.login = async (req,res) => {
+    try {
+        const {email,password} = req.body;
+    if (!email , !password){
+        res.status(201).json({message : "above fields are required"})
+
+    const user = await user.findOne({email,password})
+    if(!email ){
+        return res.status(201).json({message : "user not found"})
+    }
+    const isMatch = bcrypt.compare(password,user.password)
+    if(!isMatch){
+        return res.status(401).json({message : "password does not match"})
+    } 
+
+    if(isMatch){
+        
+    }
+
+    }
+
+    } catch (error) {
+        
+    }
+
+
+} 
