@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGO_URL,{
 
 app.use("/auth",require("./src/routes/authRouth"))
 
+
 app.get('/', (req, res) => {
   res.send(`Backend is  running for ${__dirname}` )
 })

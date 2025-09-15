@@ -3,6 +3,7 @@ const bcrypt = require ("bcrypt")
 const user = require ('../models/user')
 
 
+
 exports.signup = async (req,res) => {
     try {
         const {name, email, password} = req.body
@@ -81,5 +82,18 @@ exports.logout=async (req,res) => {
     } catch (error) {
         console.log(error)
         res.status(201).json({message:"server error"})
+    }
+}
+
+exports.profile= async (req,res) => {
+    try {
+        res.json({
+            message:"you are authorised",
+            user:req.user,
+        })
+
+    } catch (error) {
+        console.log(error,"cannot access profile")
+        res.status(500).json({message:"server error"})
     }
 }
