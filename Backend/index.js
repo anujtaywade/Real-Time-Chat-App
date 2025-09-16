@@ -1,5 +1,5 @@
 const express = require('express')
-const { route } = require('./src/routes/authRouth')
+// const { route } = require('./src/routes/authRouth')
 const app = express()
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
@@ -19,6 +19,8 @@ mongoose.connect(process.env.MONGO_URL,{
 })
 
 app.use("/auth",require("./src/routes/authRouth"))
+app.use("/",require("./src/routes/conversationRouth"))
+app.use("/",require("./src/routes/messageRouth"))
 
 
 app.get('/', (req, res) => {
