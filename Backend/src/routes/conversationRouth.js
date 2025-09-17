@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const {conversation} = require("../controller/conversation")
+const {createConversation} = require("../controller/conversation")
 
-router.post("./conversation",conversation)
+router.post("/conversation",createConversation)
 
 module.exports = router

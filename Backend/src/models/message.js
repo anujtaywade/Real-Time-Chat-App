@@ -9,7 +9,7 @@ let messageSchema = new mongoose.Schema({
     }],
     text : {String},
     mediaUrl : {String},
-    createdAt : {Date, default:Date.now}
+    createdAt : {type:Date, default:Date.now}
 })
 
 module.exports = mongoose.model('conservation',messageSchema)
