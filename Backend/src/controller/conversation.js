@@ -27,7 +27,7 @@ exports.createConversation = async (req,res) => {
     }
 }
 
-exports.conversation = async (req,res) => {
+exports.getUserConservation = async (req,res) => {
     try {
        const userId = req.user.id
        const otherUserId = req.params.otherUserId

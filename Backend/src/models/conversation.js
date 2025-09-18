@@ -11,4 +11,4 @@ const conversationSchema = new mongoose.Schema({
     updatedAt:{type:Date, default:Date.now}
 })
 
-module.exports = mongoose.model("conservation",conversationSchema)
+module.exports = mongoose.model("conversation",conversationSchema)

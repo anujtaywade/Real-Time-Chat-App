@@ -12,4 +12,4 @@ let messageSchema = new mongoose.Schema({
     createdAt : {type:Date, default:Date.now}
 })
 
-module.exports = mongoose.model('conservation',messageSchema)
+module.exports = mongoose.model('message',messageSchema)
