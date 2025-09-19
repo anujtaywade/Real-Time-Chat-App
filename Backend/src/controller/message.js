@@ -1,5 +1,7 @@
+const { compareSync } = require("bcrypt")
 const conversation = require("../models/conversation")
 const message = require("../models/message")
+const user = require("../models/user")
 
 exports.sendMessage = async (req,res) => {
     try {
@@ -7,7 +9,7 @@ exports.sendMessage = async (req,res) => {
         
 
         if(!conversationId || !text || !senderId){
-            res.status(400).json({message:"conversationId and text are required"})
+            return res.status(400).json({message:"conversationId and text are required"})
         }
 
         const newMessage = await message.create({
@@ -16,16 +18,36 @@ exports.sendMessage = async (req,res) => {
             text
         })
 
-        await message.findOneAndUpdate(conversationId,{
-            lastMessage : newMessage._id,
-            updatedAt : Date.now()
-        })
+        await conversation.findOneAndUpdate(
+            {_id: conversationId},
+            {lastMessage : newMessage._id,
+            updatedAt : Date.now()}
+        )
 
         res.status(201).json({message:"message sent successfully",date:newMessage})
 
 
     } catch (error) {
-        
+        console.log(error)
+        res.status(500).json({message:"server error"})
+    }
+}
+
+exports.getMessage = async (req,res) => {
+    try {
+        const {conversationId} = req.params
+
+        const findMessage = await message.find({
+            conversationId
+        }).sort({createdAt:1});
+
+        if(findMessage.length){
+             return res.status(200).json(findMessage)
+        }       
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message:"server error"})
     }
 }
 

@@ -20,7 +20,6 @@ exports.signup = async (req,res) => {
     const hashedPass = await bcrypt.hash(password,10)
 
     const newUser = await user.create({name, email ,password:hashedPass})
-    await newUser.save()
     res.status(201).json({
         messge:"user created successfully",
         user :{
@@ -31,7 +30,7 @@ exports.signup = async (req,res) => {
     })
     } catch (error) {
         console.log(error)
-        res.status(201).json({message : "server error"})
+        res.status(500).json({message : "server error"})
     } 
 }
 
@@ -40,12 +39,12 @@ exports.login = async (req,res) => {
         const {email,password} = req.body;
        
     if (!email || !password){
-        return res.status(201).json({message : "above fields are required"})
+        return res.status(404).json({message : "above fields are required"})
     }
 
     const existingUser = await user.findOne({email})
     if(!existingUser ){
-        return res.status(201).json({message : "user not found"})
+        return res.status(404).json({message : "user not found"})
     }
     const isMatch =await bcrypt.compare(password,existingUser.password)
     if(!isMatch){
@@ -58,7 +57,7 @@ exports.login = async (req,res) => {
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES}
         )
-        res.status(201).json({message : "login successful",
+        res.status(200).json({message : "login successful",
             token,
              user:{
                 id:existingUser._id,
@@ -72,7 +71,7 @@ exports.login = async (req,res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(201).json({message:"unable to login"})
+        res.status(500).json({message:"unable to login"})
     }
 } 
 

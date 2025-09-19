@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 
 let messageSchema = new mongoose.Schema({
-    conversationId :[{
+    conversationId :{
         type : mongoose.Schema.Types.ObjectId, ref:"conversation"
-    }],
-    sender:[{
+    },
+    sender:{
         type : mongoose.Schema.Types.ObjectId , ref:"user"
-    }],
-    text : {String},
-    mediaUrl : {String},
+    },
+    text : {type:String},
+    mediaUrl : {type :String},
     createdAt : {type:Date, default:Date.now}
 })
 
