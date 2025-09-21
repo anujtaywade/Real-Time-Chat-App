@@ -1,4 +1,4 @@
-
+import Signup from './pages/Signup'
 import './App.css'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <div >
-        
+        <Signup/>
       </div>
     </>
   )
