@@ -30,6 +30,7 @@ const Signup = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#386641] to-[#89B153]">
+      
       <div className="bg-white p-8 rounded-2xl shadow-lg w-[400px]">
         <h2 className="text-3xl font-bold text-black text-center mb-2">
           Create Account
@@ -37,6 +38,10 @@ const Signup = () => {
         <h1 className="text-lg text-gray-600 text-center mb-6">
           Welcome to <span className='font-bold'>Zoroa</span>
         </h1>
+
+         <div className='text-s flex items-center justify-center text-red-500'>
+        {error}
+      </div>
 
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
@@ -47,6 +52,7 @@ const Signup = () => {
               placeholder="Enter your name"
               value={formData.name}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#3C7A89]"
             />
           </div>
@@ -59,6 +65,7 @@ const Signup = () => {
               placeholder="Enter your Email"
               value={formData.email}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#3C7A89]"
             />
           </div>
@@ -71,6 +78,7 @@ const Signup = () => {
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#3C7A89]"
             />
           </div>
