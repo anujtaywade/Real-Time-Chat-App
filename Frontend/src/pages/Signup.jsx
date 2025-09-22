@@ -35,7 +35,7 @@ const Signup = () => {
         <h2 className="text-3xl font-bold text-black text-center mb-2">
           Create Account
         </h2>
-        <h1 className="text-lg text-gray-600 text-center mb-6">
+        <h1 className="text-lg text-gray-600 text-center mb-4">
           Welcome to <span className='font-bold'>Zoroa</span>
         </h1>
 
