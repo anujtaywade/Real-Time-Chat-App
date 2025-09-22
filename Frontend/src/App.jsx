@@ -4,13 +4,17 @@ import Chat from "./pages/Chat.jsx";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./context/authContext.jsx";
+import Navbar from './components/Navbar.jsx';
+import LandingPage from "./pages/LandingPage.jsx";
 function App() {
   return (
     <>
       <div>
         <AuthContextProvider>
+          <Navbar/>
           <Routes>
-            <Route path="/" element={<Signup />} />
+            <Route path="/" element={<LandingPage/>}/>
+
             <Route path="/login" element={<Login />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/signup" element={<Signup />} />

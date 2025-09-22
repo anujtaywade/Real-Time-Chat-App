@@ -34,12 +34,15 @@ const Login = () => {
           Welcome Back!
         </h2>
         <h1 className="text-lg text-gray-600 text-center mb-4">
-          Login to<span className='font-bold'>Zoroa</span>
+          Login to <span className='font-bold'>Zoroa</span>
         </h1>
+        
 
          <div className='text-s flex items-center justify-center text-red-500'>
         {error}
       </div>
+
+       
 
         <form onSubmit={handleLogin} className="space-y-4">
         
@@ -81,8 +84,11 @@ const Login = () => {
           >
             Login
           </button>
+         
         </form>
       </div>
+      <img className='size-64 absolute bottom-[69%]  ' 
+          src="\gojo.png" alt="" />
     </div>
   )
 }

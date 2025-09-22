@@ -31,7 +31,7 @@ const Signup = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#386641] to-[#89B153]">
       
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-[400px]">
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-[400px] mt-20">
         <h2 className="text-3xl font-bold text-black text-center mb-2">
           Create Account
         </h2>
@@ -96,6 +96,8 @@ const Signup = () => {
           </button>
         </form>
       </div>
+      <img className='size-40 w-fit absolute bottom-[75%]' 
+      src="\Inosuke.png" alt="" />
     </div>
   );
 };
