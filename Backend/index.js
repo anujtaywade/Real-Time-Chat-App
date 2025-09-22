@@ -1,9 +1,15 @@
 const express = require('express')
-
+const cors = require('cors')
 const app = express()
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 dotenv.config()
+
+app.use(cors({
+  origin:"http://localhost:5173",
+  methods:["GET","PUT","POST","DELETE"],
+  credentials:true
+}))
 
 app.use(express.json())
 
@@ -29,5 +35,5 @@ app.get('/', (req, res) => {
 
 const port = 7000
 app.listen(port, () => {
-  console.log(`running on http://localhost:${port}`)
+  console.log(`running on http://localhost:${port} for ${__dirname}`)
 })

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-
+import  api  from "../api/axios.jsx";
+import { Link,useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [formData, setformData] = useState({
@@ -10,25 +10,32 @@ const Signup = () => {
         password:""
     });
 
-    const [Error, setError] = useState("");
-
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleChange = (e)=>{
         setformData({...formData,[e.target.name]:e.target.value})
     }
 
-    const handleSignup= ()=>{
-
+    const handleSignup=async (e) => {
+      e.preventDefault();
+      try {
+        await api.post("/auth/signup",formData)
+        navigate("/login")
+      } catch (err) {
+        setError(err.response?.data?.error) ||
+        setError(err.response?.data?.message)
+      }
     }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#3C7A89] to-[#2E4756]">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#386641] to-[#89B153]">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-[400px]">
         <h2 className="text-3xl font-bold text-black text-center mb-2">
           Create Account
         </h2>
         <h1 className="text-lg text-gray-600 text-center mb-6">
-          Welcome to Zoo
+          Welcome to <span className='font-bold'>Zoroa</span>
         </h1>
 
         <form onSubmit={handleSignup} className="space-y-4">
@@ -68,11 +75,16 @@ const Signup = () => {
             />
           </div>
 
+          <p>
+            Already have an Account?  <Link to="/login" className='text-[#A7C957] underline'>login</Link>
+
+          </p>
+
           <button
             type="submit"
-            className="w-full bg-[#3C7A89] text-white py-2 rounded-lg hover:bg-[#2E4756] transition"
+            className="w-full bg-[#6A994E] text-white py-2 rounded-lg hover:bg-[#386641] transition"
           >
-            Submit
+            Signup
           </button>
         </form>
       </div>
