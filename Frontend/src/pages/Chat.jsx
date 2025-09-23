@@ -12,6 +12,7 @@ const Chat = () => {
     const fetchConversation = async () => {
       try {
         const res = await api.get(`/findAll/${User._id}`);
+        // console.log("api resonse",res.data)
         setAllConversation(res.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message);

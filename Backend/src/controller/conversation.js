@@ -1,7 +1,7 @@
 const conversation = require('../models/conversation');
 const User = require('../models/user');
 
-// Create a new conversation or return existing one
+
 exports.createConversation = async (req, res) => {
     try {
         const { senderId, receiverId } = req.body;
@@ -10,7 +10,6 @@ exports.createConversation = async (req, res) => {
             return res.status(400).json({ message: "Cannot find senderId or receiverId" });
         }
 
-        // Check if conversation already exists
         let existingConversation = await conversation.findOne({
             participants: { $all: [senderId, receiverId] }
         });
@@ -19,7 +18,7 @@ exports.createConversation = async (req, res) => {
             const newConversation = await conversation.create({
                 participants: [senderId, receiverId]
             });
-            return res.status(201).json(newConversation); // 201 Created
+            return res.status(201).json(newConversation); 
         } else {
             return res.status(200).json(existingConversation);
         }
@@ -30,7 +29,7 @@ exports.createConversation = async (req, res) => {
     }
 };
 
-// Get a specific conversation between two users
+
 exports.getUserConversation = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -52,7 +51,7 @@ exports.getUserConversation = async (req, res) => {
     }
 };
 
-// Get all conversations for a specific user
+
 exports.getUserConversations = async (req, res) => {
     try {
         const userId = req.params.userId;
