@@ -12,7 +12,7 @@ const Chat = () => {
     const fetchConversation = async () => {
       try {
         const res = await api.get(`/findAll/${User._id}`);
-        // console.log("api resonse",res.data)
+        console.log("api resonse:",res.data)
         setAllConversation(res.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
@@ -35,7 +35,7 @@ const Chat = () => {
                 className="p-4 mb-2 border border-gray-200 rounded-md shadow-sm bg-white"
               >
                {conv.participants
-  .filter(p => p._id !== User._id)
+  .filter(p => p._id !== String(User._id))
   .map(p => p.name)
   .join(", ")}
               </div>
