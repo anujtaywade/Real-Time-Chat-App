@@ -1,12 +1,14 @@
 import React from 'react'
-import { createContext , useState } from "react";
+import { createContext , useState  } from "react";
+import {jwtDecode} from 'jwt-decode';
 
 export const AuthContext=createContext()
 
 export const AuthContextProvider = ({children}) => {
     const [User, setUser] = useState(()=>{
         const token = localStorage.getItem("token")
-        return token? {token} : null
+        return token? {token,...jwtDecode(token)} : null
+        
     })
 
     const login = (data)=>{

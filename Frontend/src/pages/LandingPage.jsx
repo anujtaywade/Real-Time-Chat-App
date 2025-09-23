@@ -16,9 +16,7 @@ const LandingPage = () => {
         </Link>
 
         <div >
-        {/* <img
-        className='absolute left-[60%] top-[30%] h-[25%]'
-        src="\landin page zoro.PNG" alt="zoro" /> */}
+
         <img
         className='absolute left-[60%] top-[30%] h-[55%] opacity-90' 
         src="\luffy.PNG" alt="" />
