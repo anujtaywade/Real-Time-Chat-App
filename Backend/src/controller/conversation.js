@@ -1,3 +1,4 @@
+const { Mongoose, default: mongoose } = require('mongoose');
 const conversation = require('../models/conversation');
 const User = require('../models/user');
 
@@ -10,13 +11,16 @@ exports.createConversation = async (req, res) => {
             return res.status(400).json({ message: "Cannot find senderId or receiverId" });
         }
 
+        const senderObjectId = new mongoose.Types.ObjectId(senderId)
+        const receiverObjectId = new mongoose.Types.ObjectId(receiverId)
+
         let existingConversation = await conversation.findOne({
-            participants: { $all: [senderId, receiverId] }
+            participants: { $all: [senderObjectId, receiverObjectId] }
         });
 
         if (!existingConversation) {
             const newConversation = await conversation.create({
-                participants: [senderId, receiverId]
+                participants: [senderObjectId, receiverObjectId]
             });
             return res.status(201).json(newConversation); 
         } else {
@@ -32,8 +36,8 @@ exports.createConversation = async (req, res) => {
 
 exports.getUserConversation = async (req, res) => {
     try {
-        const userId = req.user.id;
-        const otherUserId = req.params.otherUserId;
+        const userId = new mongoose.Types.ObjectId(req.user.id); 
+        const otherUserId = new mongoose.Types.ObjectId(req.params.otherUserId);
 
         const existingConversation = await conversation.findOne({
             participants: { $all: [userId, otherUserId] }
@@ -54,11 +58,17 @@ exports.getUserConversation = async (req, res) => {
 
 exports.getUserConversations = async (req, res) => {
     try {
-        const userId = req.params.userId;
+        const userId = new mongoose.Types.ObjectId(req.params.userId);
+        
+
 
         const conversations = await conversation.find({
             participants: { $in: [userId] }
-        }).populate("participants", "name email");
+        }).populate("participants", "name email")
+        .populate("lastMessage")
+        .sort({ updatedAt: -1 });
+        
+        
 
         return res.status(200).json(conversations || []);
 
