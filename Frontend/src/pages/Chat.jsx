@@ -7,18 +7,23 @@ const Chat = () => {
   const [error, setError] = useState("");
   const [AllConversation, setAllConversation] = useState([]);
   const { User } = useContext(AuthContext);
+  const [Loading, setLoading] = useState(null);
+  const [SelectedConv, setSelectedConv] = useState(null);
 
   useEffect(() => {
+  
     const fetchConversation = async () => {
       try {
-        const res = await api.get(`/findAll/${User._id}`);
-        console.log("api resonse:",res.data)
+        setLoading(true)
+        const res = await api.get(`/findAll/${User.id}`);
+     
         setAllConversation(res.data);
+        setLoading(false)
       } catch (err) {
         setError(err.response?.data?.message || err.message);
       }
     };
-    if (User._id) fetchConversation();
+    if (User.id) fetchConversation();
   }, [User]);
   return (
     <div className=" min-h-screen p-6 bg-gray-50">
@@ -28,20 +33,22 @@ const Chat = () => {
         <div>{error && <p className="text-xl text-red-500 ">{error}</p>}</div>
 
         <div>
-          {AllConversation?.length > 0 ? (
+          {Loading? <p>Loading...</p> :( AllConversation?.length > 0 ? (
             AllConversation.map((conv) => (
               <div
-                key={conv._id}
+                key={conv.id}
+                onClick={()=>{setSelectedConv(conv)}}
                 className="p-4 mb-2 border border-gray-200 rounded-md shadow-sm bg-white"
               >
                {conv.participants
-  .filter(p => p._id !== String(User._id))
+  .filter(p => p.id !== String(User.id))
   .map(p => p.name)
   .join(", ")}
               </div>
             ))
           ) : (
             <p>No conversations yet</p>
+          )
           )}
         </div>
       </div>
