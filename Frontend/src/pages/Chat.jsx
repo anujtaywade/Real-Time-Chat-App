@@ -1,59 +1,75 @@
-import React, { useContext } from "react";
-import { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import api from "../api/axios";
 
 const Chat = () => {
-  const [error, setError] = useState("");
-  const [AllConversation, setAllConversation] = useState([]);
   const { User } = useContext(AuthContext);
-  const [Loading, setLoading] = useState(null);
-  const [SelectedConv, setSelectedConv] = useState(null);
+  const [allConversation, setAllConversation] = useState([]);
+  const [selectedConv, setSelectedConv] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-  
+
+    if (!User?.id) return;
+    console.log(User.id)
+
     const fetchConversation = async () => {
+    console.log(allConversation)
       try {
-        setLoading(true)
+        setLoading(true);
         const res = await api.get(`/findAll/${User.id}`);
-     
-        setAllConversation(res.data);
-        setLoading(false)
+ 
+        const conversations = res.data.map((conv, index) => ({
+          ...conv,
+          uniqueKey: conv.id || conv._id || index,
+        }));
+        setAllConversation(conversations);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
+      } finally {
+        setLoading(false);
       }
     };
-    if (User.id) fetchConversation();
-  }, [User]);
-  return (
-    <div className=" min-h-screen p-6 bg-gray-50">
-      <div>{User?.name || "Username"}</div>
-      <div>
-        <h1 className="text-3xl py-4 px-12 ">Chats</h1>
-        <div>{error && <p className="text-xl text-red-500 ">{error}</p>}</div>
 
-        <div>
-          {Loading? <p>Loading...</p> :( AllConversation?.length > 0 ? (
-            AllConversation.map((conv) => (
-              <div
-                key={conv.id}
-                onClick={()=>{setSelectedConv(conv)}}
-                className="p-4 mb-2 border border-gray-200 rounded-md shadow-sm bg-white"
-              >
-               {conv.participants
-  .filter(p => p.id !== String(User.id))
-  .map(p => p.name)
-  .join(", ")}
-              </div>
-            ))
-          ) : (
-            <p>No conversations yet</p>
-          )
-          )}
-        </div>
+    fetchConversation();
+  }, [User]);
+
+ return (
+    <div className="w-80 h-screen bg-gray-50 border-r border-gray-200 flex flex-col">
+
+      <div className="p-4 bg-white border-b border-gray-200 font-bold text-xl">
+        Chats
+      </div>
+
+
+      <div className="flex-1 overflow-y-auto">
+        {loading ? (
+          <p className="p-4 text-gray-500">Loading conversations...</p>
+        ) : error ? (
+          <p className="p-4 text-red-500">{error}</p>
+        ) : allConversation.length > 0 ? (
+          allConversation.map((conv) => (
+            <div
+              key={conv.uniqueKey}
+              onClick={() => setSelectedConv(conv)}
+              className={`p-4 cursor-pointer border-b border-gray-100 hover:bg-gray-100 rounded-r-lg ${
+                selectedConv?.uniqueKey === conv.uniqueKey
+                  ? "bg-gray-200 font-semibold"
+                  : ""
+              }`}
+            > 
+              
+              {conv.participants.find((p) => p._id !== User.id)?.name || "Unknown"}
+            </div>
+          ))
+        ) : (
+          <p className="p-4 text-gray-500">No conversations yet</p>
+        )}
       </div>
     </div>
   );
 };
+
 
 export default Chat;

@@ -13,7 +13,7 @@ export const AuthContextProvider = ({children}) => {
 
     const login = (data)=>{
         localStorage.setItem("token",data.token)
-        setUser({token:data.token})
+        setUser({token:data.token,...jwtDecode(data.token)})
     }
 
     const logout=()=>{
