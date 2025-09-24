@@ -18,6 +18,8 @@ exports.createConversation = async (req, res) => {
             participants: { $all: [senderObjectId, receiverObjectId] }
         });
 
+
+        
         if (!existingConversation) {
             const newConversation = await conversation.create({
                 participants: [senderObjectId, receiverObjectId]
