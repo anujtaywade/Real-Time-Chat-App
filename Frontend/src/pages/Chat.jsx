@@ -67,6 +67,9 @@ const Chat = () => {
           <p className="p-4 text-gray-500">No conversations yet</p>
         )}
       </div>
+
+        
+
     </div>
   );
 };
