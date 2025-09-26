@@ -1,12 +1,14 @@
-import React, { use } from 'react'
+import React, { useContext } from 'react'
 import api from '../api/axios';
 import {  AuthContext } from "../context/AuthContext";
 
-const Message = () => {
-    const {user} = use(AuthContext)
+const Message = ({conversation}) => {
+    const {user} = useContext(AuthContext)
+
   return (
     <div>
-       <div>
+       <div className='flex h-screen'>
+
           <input 
           type="text"
           name="name"

@@ -2,10 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import api from "../api/axios";
 
-const Chat = () => {
+const ChatList = ({selectedConv, setSelectedConv}) => {
   const { User } = useContext(AuthContext);
   const [allConversation, setAllConversation] = useState([]);
-  const [selectedConv, setSelectedConv] = useState(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -42,6 +42,8 @@ const Chat = () => {
         Chats
       </div>
 
+     
+
 
       <div className="flex-1 overflow-y-auto">
         {loading ? (
@@ -75,4 +77,4 @@ const Chat = () => {
 };
 
 
-export default Chat;
+export default ChatList;
