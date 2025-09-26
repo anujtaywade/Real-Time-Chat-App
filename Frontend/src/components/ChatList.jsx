@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import api from "../api/axios";
 
+
 const ChatList = ({selectedConv, setSelectedConv}) => {
   const { User } = useContext(AuthContext);
   const [allConversation, setAllConversation] = useState([]);
@@ -22,7 +23,7 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
  
         const conversations = res.data.map((conv, index) => ({
           ...conv,
-          uniqueKey: conv.id || conv._id || index,
+          uniqueKey: conv._id ,
         }));
         setAllConversation(conversations);
       } catch (err) {
@@ -54,7 +55,11 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
           allConversation.map((conv) => (
             <div
               key={conv.uniqueKey}
-              onClick={() => setSelectedConv(conv)}
+              onClick={() => {
+                console.log(conv);
+                setSelectedConv(conv)
+              }}
+              
               className={`p-4 cursor-pointer border-b border-gray-100 hover:bg-gray-100 rounded-r-lg ${
                 selectedConv?.uniqueKey === conv.uniqueKey
                   ? "bg-gray-200 font-semibold"
@@ -64,6 +69,7 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
               
               {conv.participants.find((p) => p._id !== User.id)?.name || "Unknown"}
             </div>
+        
           ))
         ) : (
           <p className="p-4 text-gray-500">No conversations yet</p>

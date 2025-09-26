@@ -1,14 +1,16 @@
 import React from 'react'
 import ChatList from './ChatList';
 import MessagePanel from './MessagePanel';
-import React, { useState } from 'react';
+import { useState } from "react";
 
 
-const chatApp = () => {
+const ChatApp = () => {
     const [selectedConv, setSelectedConv] = useState(null);
+    console.log("currently selected",selectedConv)
   return (
     <div className='flex h-screen'>
       <ChatList selectedConv={selectedConv} setSelectedConv={setSelectedConv}/>
+      
 
       {selectedConv ? (
         <MessagePanel conversation={selectedConv} />
@@ -22,4 +24,4 @@ const chatApp = () => {
   )
 }
 
-export default chatApp
+export default ChatApp

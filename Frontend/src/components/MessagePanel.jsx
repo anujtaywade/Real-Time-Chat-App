@@ -3,7 +3,7 @@ import api from '../api/axios';
 import {  AuthContext } from "../context/AuthContext";
 
 const Message = ({conversation}) => {
-    const {user} = useContext(AuthContext)
+    const {User} = useContext(AuthContext)
 
   return (
     <div>
@@ -13,6 +13,7 @@ const Message = ({conversation}) => {
           type="text"
           name="name"
           placeholder="Start typing"
+          
           
 
            />
