@@ -60,7 +60,7 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
                 setSelectedConv(conv)
               }}
               
-              className={`p-4 cursor-pointer border-b border-gray-100 hover:bg-gray-100 rounded-r-lg ${
+              className={`p-4 text-xl cursor-pointer border-b border-gray-100 hover:bg-gray-100 rounded-r-lg ${
                 selectedConv?.uniqueKey === conv.uniqueKey
                   ? "bg-gray-200 font-semibold"
                   : ""
