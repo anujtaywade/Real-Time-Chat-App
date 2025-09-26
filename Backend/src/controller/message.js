@@ -39,7 +39,7 @@ exports.getMessage = async (req,res) => {
 
         const findMessage = await message.find({
             conversationId
-        }).sort({createdAt:1});
+        }).sort({createdAt:"DESC"}).limit({message:'50'})
 
         if(findMessage.length){
              return res.status(200).json(findMessage)
