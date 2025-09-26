@@ -47,6 +47,9 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
 
 
       <div className="flex-1 overflow-y-auto">
+        <h1 className="text-2xl font-bold p-4 " >
+          Chats
+        </h1>
         {loading ? (
           <p className="p-4 text-gray-500">Loading conversations...</p>
         ) : error ? (
