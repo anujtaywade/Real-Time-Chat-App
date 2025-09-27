@@ -31,7 +31,11 @@ const Navbar = () => {
         >
           Zoroa
         </h1>
-        <div>
+       
+      
+       {!isAbsolute && User && (
+         <div>
+          
           <button
             onClick={() => setOpen((prev) => !prev)}
             className="absolute right-12 top-5 text-3xl"
@@ -77,12 +81,13 @@ const Navbar = () => {
             </div>
           )}
         </div>
+       )}
 
         {ProfileOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
-              <h1>{User.name}</h1>
-              <h1>Email:user.email</h1>
+              <h1>User: {User.name}</h1>
+              <h1>Email:{User.email}</h1>
               <h1>account created: user.cretedAt</h1>
               <h1>ZoroaID:xyz1234</h1>
               <button

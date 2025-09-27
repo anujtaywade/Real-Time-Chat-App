@@ -35,7 +35,7 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
 
     fetchConversation();
   }, [User]);
-  console.log(User?.name)
+
 
  return (
     <div className="w-80 h-screen bg-gray-50 border-r border-gray-200 flex flex-col">

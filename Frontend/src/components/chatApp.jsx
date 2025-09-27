@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const ChatApp = () => {
     const [selectedConv, setSelectedConv] = useState(null);
-    console.log("currently selected",selectedConv)
+
   return (
     <div className='flex h-screen'>
       <ChatList selectedConv={selectedConv} setSelectedConv={setSelectedConv}/>
