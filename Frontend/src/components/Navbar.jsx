@@ -8,11 +8,10 @@ const Navbar = () => {
   const absoluteLoation = ["/", "/signup", "/login"];
   const isAbsolute = absoluteLoation.includes(location.pathname);
 
-const [Open, setOpen] = useState(false);
-const [ProfileOpen, setProfileOpen] = useState(false);
-const [ThemeOpen, setThemeOpen] = useState(false);
-const [LogoutOpen, setLogoutOpen] = useState(false);
-
+  const [Open, setOpen] = useState(false);
+  const [ProfileOpen, setProfileOpen] = useState(false);
+  const [ThemeOpen, setThemeOpen] = useState(false);
+  const [LogoutOpen, setLogoutOpen] = useState(false);
 
   return (
     <div className="">
@@ -28,81 +27,98 @@ const [LogoutOpen, setLogoutOpen] = useState(false);
         >
           Zoroa
         </h1>
-<div>
-  <button
-    onClick={() => setOpen(prev=>!prev)}
-    className="absolute right-12 top-5 text-3xl"
-  >
-    <FaUserCircle />
-  </button>
+        <div>
+          <button
+            onClick={() => setOpen((prev) => !prev)}
+            className="absolute right-12 top-5 text-3xl"
+          >
+            <FaUserCircle />
+          </button>
 
-  {Open && (
-    <div className="absolute right-5 top-14 w-48 bg-white border rounded-xl shadow-lg py-2 z-50">
-    
-      <button
-        onClick={() => setOpen(false)}
-        className="absolute top-2 right-2 text-gray-400 hover:text-black"
-      >
-        ✕
-      </button>
+          {Open && (
+            <div className="absolute right-5 top-14 w-48 bg-white border rounded-xl shadow-lg py-2 z-50">
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute top-2 right-2 text-gray-400 hover:text-black"
+              >
+                ✕
+              </button>
 
-    
-      <button onClick={()=>{setProfileOpen(true)}} className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition">
-        <h1 className="text-gray-700 font-medium">👤 Profile</h1>
-      </button>
+              <button
+                onClick={() => {
+                  setProfileOpen(true);
+                }}
+                className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition"
+              >
+                <h1 className="text-gray-700 font-medium">👤 Profile</h1>
+              </button>
 
-      <button onClick={()=>{setThemeOpen(true)}} className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition">
-        <h1 className="text-gray-700 font-medium">🎨 Theme</h1>
-      </button>
+              <button
+                onClick={() => {
+                  setThemeOpen(true);
+                }}
+                className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition"
+              >
+                <h1 className="text-gray-700 font-medium">🎨 Theme</h1>
+              </button>
 
-      <button onClick={()=>{setLogoutOpen(true)}} className="w-full text-left px-4 py-2 rounded-md hover:bg-red-100 transition">
-        <h1 className="text-red-600 font-medium">🚪 Logout</h1>
-      </button>
-    </div>
-  )}
-</div>
-
-      {ProfileOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-          <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
-            <h1>user:ajnuj231235</h1>
-              <button onClick={()=>{setProfileOpen(false)}}
-                className="absolute top-2 right-2 text-gray-600 hover:text-black">
-                X
-              </button>            
-          </div>
+              <button
+                onClick={() => {
+                  setLogoutOpen(true);
+                }}
+                className="w-full text-left px-4 py-2 rounded-md hover:bg-red-100 transition"
+              >
+                <h1 className="text-red-600 font-medium">🚪 Logout</h1>
+              </button>
+            </div>
+          )}
         </div>
-      )}
 
-     {ThemeOpen && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
-   
-      <button
-        onClick={() => setThemeOpen(false)}
-        className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 transition"
-      >
-        ✕
-      </button>
+        {ProfileOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
+              <h1>user:user._id</h1>
+              <h1>Email:user.email</h1>
+              <h1>account created: user.cretedAt</h1>
+              <h1>ZoroaID:xyz1234</h1>
+              <button
+                onClick={() => {
+                  setProfileOpen(false) ;
+                }}
+                className="absolute top-2 right-2 text-gray-600 hover:text-black"
+              >
+                X
+              </button>
+            </div>
+          </div>
+        )}
 
-   
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Select Theme</h2>
+        {ThemeOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
+              <button
+                onClick={() => setThemeOpen(false)}
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 transition"
+              >
+                ✕
+              </button>
 
-    
-      <button className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm">
-         Dark Mode
-      </button>
+              <h2 className="text-xl font-bold mb-4 text-gray-800">
+                Select Theme
+              </h2>
 
-      <button className="flex items-center w-full px-4 py-2 rounded-lg hover:bg-gray-100 transition shadow-sm">
-         Light Mode
-      </button>
-    </div>
-  </div>
-)}
+              <button className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm">
+                Dark Mode
+              </button>
 
+              <button className="flex items-center w-full px-4 py-2 rounded-lg hover:bg-gray-100 transition shadow-sm">
+                Light Mode
+              </button>
+            </div>
+          </div>
+        )}
 
-
-      {LogoutOpen && (
+        {LogoutOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
               <button
@@ -118,7 +134,6 @@ const [LogoutOpen, setLogoutOpen] = useState(false);
             </div>
           </div>
         )}
-
       </div>
     </div>
   );
