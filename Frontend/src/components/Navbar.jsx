@@ -1,17 +1,21 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { useState } from "react";
+import { useState ,useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const location = useLocation();
   const absoluteLoation = ["/", "/signup", "/login"];
   const isAbsolute = absoluteLoation.includes(location.pathname);
+  const {User} = useContext(AuthContext)
+  console.log(User)
 
   const [Open, setOpen] = useState(false);
   const [ProfileOpen, setProfileOpen] = useState(false);
   const [ThemeOpen, setThemeOpen] = useState(false);
   const [LogoutOpen, setLogoutOpen] = useState(false);
+
 
   return (
     <div className="">
@@ -77,7 +81,7 @@ const Navbar = () => {
         {ProfileOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
-              <h1>user:user._id</h1>
+              <h1>{User.name}</h1>
               <h1>Email:user.email</h1>
               <h1>account created: user.cretedAt</h1>
               <h1>ZoroaID:xyz1234</h1>

@@ -13,10 +13,10 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
   useEffect(() => {
 
     if (!User?.id) return;
-    console.log(User.id)
+    
 
     const fetchConversation = async () => {
-    console.log(allConversation)
+  
       try {
         setLoading(true);
         const res = await api.get(`/findAll/${User.id}`);
@@ -35,6 +35,7 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
 
     fetchConversation();
   }, [User]);
+  console.log(User?.name)
 
  return (
     <div className="w-80 h-screen bg-gray-50 border-r border-gray-200 flex flex-col">
@@ -59,7 +60,7 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
             <div
               key={conv.uniqueKey}
               onClick={() => {
-                console.log(conv);
+              
                 setSelectedConv(conv)
               }}
               
