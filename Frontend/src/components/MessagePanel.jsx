@@ -6,8 +6,6 @@ const Message = ({ conversation }) => {
 
   return (
     <div className="flex flex-col h-screen w-full pt-[80px]">
-
-
    
       <div className="sticky top-[80px] z-40 pb-2 pl-2 border-b bg-white font-semibold text-2xl">
         {conversation?.participants.find((p) => p._id !== User.id)?.name || "Unknown"}
