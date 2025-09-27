@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
+import { FaSlack, FaUserCircle } from "react-icons/fa";
 import { useState ,useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
@@ -9,6 +9,7 @@ const Navbar = () => {
   const absoluteLoation = ["/", "/signup", "/login"];
   const isAbsolute = absoluteLoation.includes(location.pathname);
   const {User} = useContext(AuthContext)
+
   console.log(User)
 
   const [Open, setOpen] = useState(false);
@@ -86,13 +87,14 @@ const Navbar = () => {
         {ProfileOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
+              <h1 className="text-2xl">Profile</h1>
               <h1>User: {User.name}</h1>
               <h1>Email:{User.email}</h1>
-              <h1>account created: user.cretedAt</h1>
+              <h1>account created: {User.cretedAt}</h1>
               <h1>ZoroaID:xyz1234</h1>
               <button
                 onClick={() => {
-                  setProfileOpen(false) ;
+                  setProfileOpen(false) || setOpen(false);
                 }}
                 className="absolute top-2 right-2 text-gray-600 hover:text-black"
               >
@@ -106,7 +108,7 @@ const Navbar = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
               <button
-                onClick={() => setThemeOpen(false)}
+                onClick={() => setThemeOpen(false) || setOpen(false)}
                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 transition"
               >
                 ✕
@@ -131,7 +133,7 @@ const Navbar = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
               <button
-                onClick={() => setLogoutOpen(false)}
+                onClick={() => setLogoutOpen(false) || setOpen(false)}
                 className="absolute top-2 right-2 text-gray-600 hover:text-black"
               >
                 ✕

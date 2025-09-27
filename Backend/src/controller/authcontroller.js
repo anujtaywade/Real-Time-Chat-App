@@ -25,7 +25,8 @@ exports.signup = async (req,res) => {
         user :{
             id : newUser._id,
             name : newUser.name,
-            email : newUser.email
+            email : newUser.email,
+            createdAt : newUser.createdAt
         },
     })
     } catch (error) {
@@ -62,7 +63,8 @@ exports.login = async (req,res) => {
              user:{
                 id:existingUser._id,
                 email:existingUser.email,
-                name:existingUser.name
+                name:existingUser.name,
+                createdAt : existingUser.createdAt
             }
         })
     
