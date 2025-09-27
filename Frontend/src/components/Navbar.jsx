@@ -8,8 +8,10 @@ const Navbar = () => {
   const absoluteLoation = ["/", "/signup", "/login"];
   const isAbsolute = absoluteLoation.includes(location.pathname);
 
-
 const [Open, setOpen] = useState(false);
+const [ProfileOpen, setProfileOpen] = useState(false);
+const [ThemeOpen, setThemeOpen] = useState(false);
+const [LogoutOpen, setLogoutOpen] = useState(false);
 
 
   return (
@@ -28,7 +30,7 @@ const [Open, setOpen] = useState(false);
         </h1>
 <div>
   <button
-    onClick={() => setOpen(true)}
+    onClick={() => setOpen(prev=>!prev)}
     className="absolute right-12 top-5 text-3xl"
   >
     <FaUserCircle />
@@ -45,20 +47,78 @@ const [Open, setOpen] = useState(false);
       </button>
 
     
-      <button className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition">
+      <button onClick={()=>{setProfileOpen(true)}} className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition">
         <h1 className="text-gray-700 font-medium">👤 Profile</h1>
       </button>
 
-      <button className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition">
+      <button onClick={()=>{setThemeOpen(true)}} className="w-full text-left px-4 py-2 rounded-md hover:bg-gray-100 transition">
         <h1 className="text-gray-700 font-medium">🎨 Theme</h1>
       </button>
 
-      <button className="w-full text-left px-4 py-2 rounded-md hover:bg-red-100 transition">
+      <button onClick={()=>{setLogoutOpen(true)}} className="w-full text-left px-4 py-2 rounded-md hover:bg-red-100 transition">
         <h1 className="text-red-600 font-medium">🚪 Logout</h1>
       </button>
     </div>
   )}
 </div>
+
+      {ProfileOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
+            <h1>user:ajnuj231235</h1>
+              <button onClick={()=>{setProfileOpen(false)}}
+                className="absolute top-2 right-2 text-gray-600 hover:text-black">
+                X
+              </button>            
+          </div>
+        </div>
+      )}
+
+     {ThemeOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+    <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
+   
+      <button
+        onClick={() => setThemeOpen(false)}
+        className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 transition"
+      >
+        ✕
+      </button>
+
+   
+      <h2 className="text-xl font-bold mb-4 text-gray-800">Select Theme</h2>
+
+    
+      <button className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm">
+         Dark Mode
+      </button>
+
+      <button className="flex items-center w-full px-4 py-2 rounded-lg hover:bg-gray-100 transition shadow-sm">
+         Light Mode
+      </button>
+    </div>
+  </div>
+)}
+
+
+
+      {LogoutOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
+              <button
+                onClick={() => setLogoutOpen(false)}
+                className="absolute top-2 right-2 text-gray-600 hover:text-black"
+              >
+                ✕
+              </button>
+              <h2 className="text-xl font-bold mb-4">Confirm Logout</h2>
+              <button className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                Logout
+              </button>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
