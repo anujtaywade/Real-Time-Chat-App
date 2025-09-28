@@ -12,6 +12,7 @@ const Navbar = () => {
 
   console.log(User)
 
+
   const [Open, setOpen] = useState(false);
   const [ProfileOpen, setProfileOpen] = useState(false);
   const [ThemeOpen, setThemeOpen] = useState(false);
@@ -103,6 +104,7 @@ const Navbar = () => {
             </div>
           </div>
         )}
+        
 
         {ThemeOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">

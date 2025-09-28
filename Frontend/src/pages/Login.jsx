@@ -15,7 +15,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const res= await api.post("/auth/login",{email,password})
+      console.log(res.data)
       login(res.data)
+      
       navigate("/chat")
     } catch (error) {
       seterror(error.response?.data?.error ||

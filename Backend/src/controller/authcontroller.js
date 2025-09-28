@@ -54,7 +54,7 @@ exports.login = async (req,res) => {
 
     if(isMatch){
         const token = jwt.sign(
-            {id:existingUser._id, email: existingUser.email, name:existingUser.name},
+            {id:existingUser._id, email: existingUser.email, name:existingUser.name , createdAt:existingUser.createdAt},
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES}
         )
