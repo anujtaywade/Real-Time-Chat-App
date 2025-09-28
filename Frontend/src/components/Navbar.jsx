@@ -22,9 +22,10 @@ const Navbar = () => {
 const handleLogout=()=>{
   logout()
   setLogoutOpen(false)
+  setOpen(false)
   navigate("/login")
 }
-console.log(handleLogout)
+
 
   return (
     <div className="">
@@ -134,7 +135,7 @@ console.log(handleLogout)
 
         <div className="flex justify-between text-gray-700 font-medium">
           <span>Zoroa ID:</span>
-          <span className="text-gray-500">xyz1234</span>
+          <span className="text-gray-500">{User.uniqueID}</span>
         </div>
       </div>
 

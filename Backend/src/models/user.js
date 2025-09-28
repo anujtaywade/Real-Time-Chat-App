@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const {nanoid} = require('nanoid')
 
 const userSchema = new mongoose.Schema(
     {
@@ -21,8 +22,16 @@ const userSchema = new mongoose.Schema(
             required : true,
             minlength : 6
         },
+        
+            uniqueID :{
+                type : String,
+                unique : true,
+                default : ()=>nanoid(8)
+            }
+        
     },
-    {timestamps : true}
+    {timestamps : true},
+   
 )
 
 userSchema.pre("save",async function (next) {
@@ -31,7 +40,7 @@ userSchema.pre("save",async function (next) {
     next();
 })
 
-userSchema.method.matchpassword =async function (enteredpassword) {
+userSchema.methods.matchpassword =async function (enteredpassword) {
     return await bcrypt.compare(enteredpassword,this.password)
 }
 

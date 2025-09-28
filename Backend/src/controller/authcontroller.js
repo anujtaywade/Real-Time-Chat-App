@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require ("bcrypt")
 const user = require ('../models/user')
-
+const {nanoid} = require('nanoid')
 
 
 exports.signup = async (req,res) => {
+    
     try {
+        
         const {name, email, password} = req.body
 
     if(!name || !email || !password){
@@ -19,14 +21,18 @@ exports.signup = async (req,res) => {
 
     const hashedPass = await bcrypt.hash(password,10)
 
-    const newUser = await user.create({name, email ,password:hashedPass})
+    const uniqueID = nanoid(8) ;
+
+    const newUser = await user.create({name, email ,password:hashedPass,uniqueID})
     res.status(201).json({
         messge:"user created successfully",
         user :{
             id : newUser._id,
             name : newUser.name,
             email : newUser.email,
-            createdAt : newUser.createdAt
+            createdAt : newUser.createdAt,
+            uniqueID : newUser.uniqueID
+          
         },
     })
     } catch (error) {
@@ -54,7 +60,7 @@ exports.login = async (req,res) => {
 
     if(isMatch){
         const token = jwt.sign(
-            {id:existingUser._id, email: existingUser.email, name:existingUser.name , createdAt:existingUser.createdAt},
+            {id:existingUser._id, email: existingUser.email, name:existingUser.name , createdAt:existingUser.createdAt ,uniqueID:existingUser.uniqueID},
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES}
         )
@@ -64,7 +70,8 @@ exports.login = async (req,res) => {
                 id:existingUser._id,
                 email:existingUser.email,
                 name:existingUser.name,
-                createdAt : existingUser.createdAt
+                createdAt : existingUser.createdAt,
+                uniqueID :existingUser.uniqueID
             }
         })
     
