@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation,Navigate, useNavigate } from "react-router-dom";
 import { FaSlack, FaUserCircle } from "react-icons/fa";
 import { useState ,useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -8,7 +8,8 @@ const Navbar = () => {
   const location = useLocation();
   const absoluteLoation = ["/", "/signup", "/login"];
   const isAbsolute = absoluteLoation.includes(location.pathname);
-  const {User} = useContext(AuthContext)
+  const {User , logout} = useContext(AuthContext)
+  const navigate = useNavigate()
 
   console.log(User)
 
@@ -18,6 +19,12 @@ const Navbar = () => {
   const [ThemeOpen, setThemeOpen] = useState(false);
   const [LogoutOpen, setLogoutOpen] = useState(false);
 
+const handleLogout=()=>{
+  logout()
+  setLogoutOpen(false)
+  navigate("/login")
+}
+console.log(handleLogout)
 
   return (
     <div className="">
@@ -85,25 +92,57 @@ const Navbar = () => {
         </div>
        )}
 
-        {ProfileOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-            <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
-              <h1 className="text-2xl">Profile</h1>
-              <h1>User: {User.name}</h1>
-              <h1>Email:{User.email}</h1>
-              <h1>account created: {User.cretedAt}</h1>
-              <h1>ZoroaID:xyz1234</h1>
-              <button
-                onClick={() => {
-                  setProfileOpen(false) || setOpen(false);
-                }}
-                className="absolute top-2 right-2 text-gray-600 hover:text-black"
-              >
-                X
-              </button>
-            </div>
-          </div>
-        )}
+       {ProfileOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+    <div className="bg-white rounded-3xl shadow-2xl p-6 w-80 relative">
+   
+      <button
+        onClick={() => {
+          setProfileOpen(false);
+          setOpen(false);
+        }}
+        className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-xl font-bold"
+      >
+        ✕
+      </button>
+
+   
+      <div className="flex flex-col items-center mb-4">
+        <div className="bg-gray-200 rounded-full p-4 mb-2">
+          <FaUserCircle className="text-6xl text-gray-500" />
+        </div>
+        <h2 className="text-xl font-semibold text-gray-800">{User.name}</h2>
+        <p className="text-gray-500 text-sm">{User.email}</p>
+      </div>
+
+      <hr className="my-4 border-gray-200" />
+
+  
+      <div className="space-y-3">
+        <div className="flex justify-between text-gray-700 font-medium">
+          <span>Account :<br />Created</span>
+          <span>
+            {User?.createdAt
+              ? new Date(User.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : "N/A"}
+          </span>
+        </div>
+
+        <div className="flex justify-between text-gray-700 font-medium">
+          <span>Zoroa ID:</span>
+          <span className="text-gray-500">xyz1234</span>
+        </div>
+      </div>
+
+    
+   
+    </div>
+  </div>
+)}
         
 
         {ThemeOpen && (
@@ -129,21 +168,23 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-        )}
+        )}       
 
         {LogoutOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="bg-white rounded-2xl shadow-lg p-6 w-80 relative">
               <button
-                onClick={() => setLogoutOpen(false) || setOpen(false)}
+                onClick={() => setLogoutOpen(false) || setOpen(false) }
                 className="absolute top-2 right-2 text-gray-600 hover:text-black"
               >
                 ✕
               </button>
-              <h2 className="text-xl font-bold mb-4">Confirm Logout</h2>
-              <button className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+              <div >
+                <h2 className="text-xl font-bold mb-4">Confirm Logout</h2>
+              <button onClick={handleLogout} className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" >
                 Logout
               </button>
+              </div>
             </div>
           </div>
         )}
