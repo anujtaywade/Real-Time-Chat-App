@@ -3,6 +3,7 @@ import ChatList from './ChatList';
 import MessagePanel from './MessagePanel';
 import Navbar from './Navbar';
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 
 const ChatApp = () => {
@@ -18,7 +19,7 @@ const ChatApp = () => {
       <div className='flex flex-1'> 
         <ChatList selectedConv={selectedConv} setSelectedConv={setSelectedConv}/>
       
-  
+      <Toaster position='bottom-center' reverseOrder={false} />
 
     
       {selectedConv ? (

@@ -1,7 +1,6 @@
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/login.jsx";
-import ChatApp from './components/chatApp.jsx';
-
+import ChatApp from './components/ChatApp.jsx';
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.jsx";

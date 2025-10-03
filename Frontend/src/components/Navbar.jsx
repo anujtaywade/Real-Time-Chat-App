@@ -3,6 +3,7 @@ import { NavLink, useLocation,Navigate, useNavigate } from "react-router-dom";
 import { FaSlack, FaUserCircle } from "react-icons/fa";
 import { useState ,useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import  toast  from "react-hot-toast";
 
 const Navbar = ({Theme , setTheme}) => {
   const location = useLocation();
@@ -30,10 +31,10 @@ const handleLogout=()=>{
 const handleCopiedText =()=>{
   navigator.clipboard.writeText(User.uniqueID)
   .then(()=>{
-      alert("text copied")
+      toast.success("Text Copied")
   })
   .catch((error)=>{
-    alert("cannot copy text")
+    toast.error("cannot copy text")
   })
 }
 
