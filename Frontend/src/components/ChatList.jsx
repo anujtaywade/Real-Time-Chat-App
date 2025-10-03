@@ -38,7 +38,7 @@ const ChatList = ({selectedConv, setSelectedConv}) => {
 
 
  return (
-    <div className="w-80 h-screen bg-gray-50 border-r border-gray-200 flex flex-col">
+    <div className="w-80 h-screen bg-gray-50 border-r border-gray-200 flex flex-col ">
 
       <div className="p-4 bg-white border-b border-gray-200 font-bold text-xl">
         Chats

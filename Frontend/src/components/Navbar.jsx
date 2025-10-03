@@ -18,12 +18,17 @@ const Navbar = () => {
   const [ProfileOpen, setProfileOpen] = useState(false);
   const [ThemeOpen, setThemeOpen] = useState(false);
   const [LogoutOpen, setLogoutOpen] = useState(false);
+  const [Theme, setTheme] = useState(false);
 
 const handleLogout=()=>{
   logout()
   setLogoutOpen(false)
   setOpen(false)
   navigate("/login")
+}
+
+const handlethemeToogle =()=>{
+  
 }
 
 
@@ -160,7 +165,7 @@ const handleLogout=()=>{
                 Select Theme
               </h2>
 
-              <button className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm">
+              <button className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm ">
                 Dark Mode
               </button>
               
