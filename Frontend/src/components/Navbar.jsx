@@ -4,7 +4,7 @@ import { FaSlack, FaUserCircle } from "react-icons/fa";
 import { useState ,useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-const Navbar = () => {
+const Navbar = ({Theme , setTheme}) => {
   const location = useLocation();
   const absoluteLoation = ["/", "/signup", "/login"];
   const isAbsolute = absoluteLoation.includes(location.pathname);
@@ -18,7 +18,7 @@ const Navbar = () => {
   const [ProfileOpen, setProfileOpen] = useState(false);
   const [ThemeOpen, setThemeOpen] = useState(false);
   const [LogoutOpen, setLogoutOpen] = useState(false);
-  const [Theme, setTheme] = useState(false);
+ 
 
 const handleLogout=()=>{
   logout()
@@ -165,8 +165,10 @@ const handlethemeToogle =()=>{
                 Select Theme
               </h2>
 
-              <button className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm ">
-                Dark Mode
+              <button
+               onClick={setTheme(true)}
+              className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm ">
+                Dark Mode 
               </button>
               
 

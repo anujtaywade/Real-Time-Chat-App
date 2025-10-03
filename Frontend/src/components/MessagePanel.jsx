@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from "../context/AuthContext";
 
-const Message = ({ conversation }) => {
+const Message = ({ conversation , Theme, setTheme}) => {
   const { User } = useContext(AuthContext)
 
   return (
@@ -12,7 +12,7 @@ const Message = ({ conversation }) => {
       </div>
 
   
-      <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+      <div className={`flex-1 overflow-y-auto p-4 ${Theme? "bg-gray-50" : "bg-black"} `}>
         <div className="mb-2 w-max p-2 rounded"></div>
         <div className="mb-2  w-max p-2 rounded ml-auto"></div>
       </div>
