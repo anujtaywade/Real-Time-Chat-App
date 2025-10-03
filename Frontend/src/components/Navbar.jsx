@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink, useLocation,Navigate, useNavigate } from "react-router-dom";
-import { FaSlack, FaUserCircle } from "react-icons/fa";
+import { FaSlack, FaUserCircle,FaCopy } from "react-icons/fa";
 import { useState ,useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import  toast  from "react-hot-toast";
+import { FaRegCopy } from "react-icons/fa6";
+
 
 const Navbar = ({Theme , setTheme}) => {
   const location = useLocation();
@@ -36,6 +38,7 @@ const handleCopiedText =()=>{
   .catch((error)=>{
     toast.error("cannot copy text")
   })
+  
 }
 
 
@@ -150,8 +153,8 @@ const handleCopiedText =()=>{
           <span>Zoroa ID:</span> 
           
           <span className="text-gray-500">{User.uniqueID}</span> 
-           <button onClick={handleCopiedText} className="">
-            copy
+           <button onClick={handleCopiedText } >
+            <FaRegCopy />
           </button>
         </div>
          
