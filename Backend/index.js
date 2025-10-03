@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express()
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
+const cookiePraser = require("cookie-parser")
 dotenv.config()
 
 app.use(cors({
@@ -12,6 +13,7 @@ app.use(cors({
 }))
 
 app.use(express.json())
+app.use(cookiePraser());
 
 mongoose.connect(process.env.MONGO_URL,{
    useNewUrlParser: true,
