@@ -27,6 +27,16 @@ const handleLogout=()=>{
   navigate("/login")
 }
 
+const handleCopiedText =()=>{
+  navigator.clipboard.writeText(User.uniqueID)
+  .then(()=>{
+      alert("text copied")
+  })
+  .catch((error)=>{
+    alert("cannot copy text")
+  })
+}
+
 
 
   return (
@@ -136,9 +146,15 @@ const handleLogout=()=>{
         </div>
 
         <div className="flex justify-between text-gray-700 font-medium">
-          <span>Zoroa ID:</span>
-          <span className="text-gray-500">{User.uniqueID}</span>
+          <span>Zoroa ID:</span> 
+          
+          <span className="text-gray-500">{User.uniqueID}</span> 
+           <button onClick={handleCopiedText} className="">
+            copy
+          </button>
         </div>
+         
+      
       </div>
 
     
