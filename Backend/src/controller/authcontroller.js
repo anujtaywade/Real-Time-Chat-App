@@ -19,11 +19,11 @@ exports.signup = async (req,res) => {
         return res.status(400).json({message:"Email Already in use"})
     }
 
-    const hashedPass = await bcrypt.hash(password,10)
+
 
     const uniqueID = nanoid(8) ;
 
-    const newUser = await user.create({name, email ,password:hashedPass,uniqueID})
+    const newUser = await user.create({name, email ,password})
     res.status(201).json({
         messge:"user created successfully",
         user :{
