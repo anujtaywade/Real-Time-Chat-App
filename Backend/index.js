@@ -19,16 +19,18 @@ const io = new Server(server,{
 io.on("connection",(socket)=>{
   console.log("a user connected",socket.id)
 
+  socket.on("joinRoom",(roomId)=>{
+    socket.join(roomId)
+    console.log(`socket ${socket.id} joined room`)
+  })
+
   socket.on("sendMessage",(data)=>{
-  console.log("mesage recieved : ",data)
-
-
-  socket.broadcast.emit ("receiver message : ",data)
-
-  socket.on("disconnect",(socket)=>{
-  console.log("a user disconnect",socket.id)
+  console.log("mesageRecieved",data)
+ io.in(data.conversation).emit("receiveMessage", data);
 
 })
+  socket.on("disconnect",()=>{
+  console.log("a user disconnect",socket.id)
 })
 })
 

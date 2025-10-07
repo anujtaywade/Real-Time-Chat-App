@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState,useEffect } from 'react'
 import { AuthContext } from "../context/AuthContext";
 import { useSocket } from "../context/socketContext";
 
@@ -14,23 +14,23 @@ const Message = ({ conversation , Theme, setTheme}) => {
   useEffect(() => {
     if (!socket) return;
 
-    if(conversation?._id){
-      socket.emit("join room",conversation?._id)
-    }
+  
+      socket.emit("joinRoom",conversation?._id)
+    
 
-    socket.on("recieve message",(data)=>{
-      if(data.conversationId === conversation?._id){
+    socket.on("receiveMessage",(data)=>{
+      if(data.conversation === conversation?._id){
         setMessages((prev)=>[...prev,data])
       }
     })
 
     return()=>{
-    socket.off("recieve message")
+    socket.off("receiveMessage")
   }
   }, [socket,conversation]);
 
   const handleSend=()=>{
-    if(!Message.trim || !socket) return;
+    if(!Message.trim() || !socket) return;
 
     const newMesage = {
       conversation: conversation._id,
@@ -39,8 +39,8 @@ const Message = ({ conversation , Theme, setTheme}) => {
       createdAt : new Date()
     }
 
-    socket.emit("send message",newMesage)
-    setMessage((prev)=>[...prev,newMesage])
+    socket.emit("sendMessage",newMesage)
+    setMessages((prev)=>[...prev,newMesage])
     setMessage("")
   }
 
@@ -61,7 +61,7 @@ const Message = ({ conversation , Theme, setTheme}) => {
         <div className=""></div>
         <div className=""></div>
 
-        {Message.map((msg,index)=>(
+        {Messages.map((msg,index)=>(
           <div key={index} 
           className={`mb-2 w-max p-2 rounded ${msg.sender=== User.id ? "mb-2  w-max p-2 rounded ml-auto bg-blue-500" : "bg-gray-300"}`}>
               {msg.text}

@@ -1,9 +1,12 @@
-import React, { Children, useContext } from 'react'
+import React, {  useContext ,useState,useEffect, createContext, } from 'react'
 import { io } from "socket.io-client";
 
-const SocketContext = ({Children}) => {
+  const SocketContext = createContext(null)
 
-  const SocketContext = useContext()
+export const SocketProvider= ({children}) => {
+
+
+
   const [Socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -19,12 +22,12 @@ const SocketContext = ({Children}) => {
 
 
   return (
-    <div>
+   
       <SocketContext.Provider value={Socket} >
-        {Children}
+        {children}
       </SocketContext.Provider>
-    </div>
+    
   )
 }
 
-export default SocketContext
+export const useSocket=()=>useContext(SocketContext)
