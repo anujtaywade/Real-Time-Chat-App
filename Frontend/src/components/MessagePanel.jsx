@@ -12,7 +12,7 @@ const Message = ({ conversation , Theme, setTheme}) => {
   const [Message, setMessage] = useState("");
 
   useEffect(() => {
-    if (!socket) return;
+    if (!socket || !conversation?._id) return;
 
   
       socket.emit("joinRoom",conversation?._id)
@@ -40,7 +40,7 @@ const Message = ({ conversation , Theme, setTheme}) => {
     }
 
     socket.emit("sendMessage",newMesage)
-    setMessages((prev)=>[...prev,newMesage])
+    
     setMessage("")
   }
 
@@ -63,7 +63,7 @@ const Message = ({ conversation , Theme, setTheme}) => {
 
         {Messages.map((msg,index)=>(
           <div key={index} 
-          className={`mb-2 w-max p-2 rounded ${msg.sender=== User.id ? "mb-2  w-max p-2 rounded ml-auto bg-blue-500" : "bg-gray-300"}`}>
+          className={`mb-2 w-max p-2 rounded ${msg.sender=== User.id ?  "bg-gray-300" : "mb-2  w-max p-2 rounded ml-auto bg-blue-500"}`}>
               {msg.text}
           </div>
 
