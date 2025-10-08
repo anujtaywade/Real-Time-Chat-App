@@ -1,86 +1,92 @@
-const express = require('express')
-const cors = require('cors')
-const dotenv = require('dotenv')
-const mongoose = require('mongoose')
-const cookiePraser = require("cookie-parser")
-const http = require('http')
-const {Server} = require('socket.io')
-const message = require('./src/models/message')
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const cookieParser = require("cookie-parser");
+const http = require('http');
+const { Server } = require('socket.io');
+const Message = require('./src/models/message');
 
-const app = express()
-const server = http.createServer(app)
-const io = new Server(server,{
-  cors:{
-    origin:"http://localhost:5173",
-    methods:["GET","POST"]
+dotenv.config();
+
+const app = express();
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
   }
-})
+});
 
-io.on("connection",(socket)=>{
-  console.log("a user connected",socket.id)
 
-  socket.on("joinRoom",(roomId)=>{
-    socket.join(roomId)
-    console.log(`socket ${socket.id} joined room`)
-  })
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
 
-  socket.on("sendMessage",async(data)=>{
+
+  socket.on("joinRoom", (roomId) => {
+    socket.join(roomId);
+    console.log(`Socket ${socket.id} joined room ${roomId}`);
+  });
+
+  socket.on("sendMessage", async (data) => {
     try {
-       console.log("mesageRecieved",data)
-      const newMessage = await message.create({
-        conversationID : data.conversationId,
-        sender: data.sender,
-        text:data.text,
-      })
+      console.log("Message received:", data);
 
- io.in(data.conversation).emit("receiveMessage", newMessage);
+   
+      const newMessage = await Message.create({
+        conversationId:data.conversationId,
+        sender:data.sender,
+        text: data.text,
+        createdAt: new Date(),
+      });
+
+   
+        io.in(data.conversationId).emit("receiveMessage", {
+      _id: newMessage._id.toString(),
+      conversationId: newMessage.conversationId.toString(),
+      sender: newMessage.sender.toString(),
+      text: newMessage.text,
+      createdAt: newMessage.createdAt,
+    });
+
+    
     } catch (error) {
-      console.log("error in saving message",error)
+      console.log("Error saving message:", error);
     }
- 
+  });
 
-})
-  socket.on("disconnect",()=>{
-  console.log("a user disconnect",socket.id)
-})
-})
+  socket.on("disconnect", () => {
+    console.log("User disconnected:", socket.id);
+  });
+});
 
-
-
-
-
-dotenv.config()
 
 app.use(cors({
-  origin:"http://localhost:5173",
-  methods:["GET","PUT","POST","DELETE"],
-  credentials:true
-}))
+  origin: "http://localhost:5173",
+  methods: ["GET", "PUT", "POST", "DELETE"],
+  credentials: true,
+}));
+app.use(express.json());
+app.use(cookieParser());
 
-app.use(express.json())
-app.use(cookiePraser());
 
-mongoose.connect(process.env.MONGO_URL,{
-   useNewUrlParser: true,
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(()=>{
-  console.log("connected to mongoDB")
-})
-.catch((error)=>{
-  console.log("mongoDN connection Error",error)
-})
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.log("MongoDB connection error:", error));
 
-app.use("/auth",require("./src/routes/authRouth"))
-app.use("/",require("./src/routes/conversationRouth"))
-app.use("/",require("./src/routes/messageRouth"))
 
+app.use("/auth", require("./src/routes/authRouth"));
+app.use("/", require("./src/routes/conversationRouth"));
+app.use("/", require("./src/routes/messageRouth"));
 
 app.get('/', (req, res) => {
-  res.send(`Backend is  running for ${__dirname}` )
-})
+  res.send("Backend is running");
+});
 
-const port = 7000
-server.listen(port, () => {
-  console.log(`running on http://localhost:${port} for ${__dirname}`)
-})
+
+const PORT = process.env.PORT || 7000;
+server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

@@ -11,6 +11,7 @@ export const AuthContextProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
+        console.log(decoded)
         setUser({ token, ...decoded });
       } catch {
         setUser(null);

@@ -38,8 +38,8 @@ exports.getMessage = async (req,res) => {
         const {conversationId} = req.params
 
         const findMessage = await message
-        .find({conversation:conversationId})
-        .sort({createdAt: -1})
+        .find({conversationId:conversationId})
+        .sort({createdAt: 1})
         .limit(50) 
         
         res.status(201).json(findMessage)
