@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useSocket } from "../context/socketContext";
 import axios from "axios";
 
+
 const Message = ({ conversation, Theme }) => {
   const socket = useSocket();
   const { User } = useContext(AuthContext);
@@ -62,7 +63,7 @@ const Message = ({ conversation, Theme }) => {
     };
 
 
-    // setMessages((prev) => [...prev, newMessage]);
+
     socket.emit("sendMessage", newMessage);
     setMessage("");
   };
@@ -99,12 +100,21 @@ const Message = ({ conversation, Theme }) => {
           type="text"
           value={Message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e)=>{
+            if(e.key == "Enter" && Message.trim() !== ""){
+              e.preventDefault()
+              handleSend()
+            }
+          }}
           placeholder="Start typing..."
           className="flex-1 h-12 px-4 border rounded-lg focus:outline-none"
         />
         <button
+        
           onClick={handleSend}
+     
           className="ml-2 px-4 bg-blue-500 text-white rounded-lg"
+         
         >
           Send
         </button>
