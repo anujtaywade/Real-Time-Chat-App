@@ -1,15 +1,30 @@
 import React, { useContext,useState,useEffect } from 'react'
 import { AuthContext } from "../context/AuthContext";
 import { useSocket } from "../context/socketContext";
+import axios from 'axios';
 
 
 const Message = ({ conversation , Theme, setTheme}) => {
 
   const socket = useSocket()
   const { User } = useContext(AuthContext)
-
   const [Messages, setMessages] = useState([]);
   const [Message, setMessage] = useState("");
+
+  useEffect(() => {
+    if(!conversation?._id) return;
+
+    const fetchMessage = async () => {
+      try {
+         const MESSAGE_URl = import.meta.env.VITE_MESSAGE_URL
+         const res = await axios.get(`${MESSAGE_URl}/${conversation._id}`)
+         setMessages(res.data.reverse())
+      } catch (error) {
+        console.log("error in fetching data",error)
+      }
+    }
+    fetchMessage()
+  }, [conversation?._id]);
 
   useEffect(() => {
     if (!socket || !conversation?._id) return;
@@ -19,7 +34,7 @@ const Message = ({ conversation , Theme, setTheme}) => {
     
 
     socket.on("receiveMessage",(data)=>{
-      if(data.conversation === conversation?._id){
+      if(data.conversationId === conversation?._id){
         setMessages((prev)=>[...prev,data])
       }
     })
@@ -28,6 +43,9 @@ const Message = ({ conversation , Theme, setTheme}) => {
     socket.off("receiveMessage")
   }
   }, [socket,conversation]);
+
+
+  
 
   const handleSend=()=>{
     if(!Message.trim() || !socket) return;
@@ -38,10 +56,11 @@ const Message = ({ conversation , Theme, setTheme}) => {
       text : Message,
       createdAt : new Date()
     }
-
+     setMessages((prev)=>[...prev,newMesage])
     socket.emit("sendMessage",newMesage)
-    
+   
     setMessage("")
+    
   }
 
 

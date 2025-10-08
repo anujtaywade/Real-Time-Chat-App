@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const cookiePraser = require("cookie-parser")
 const http = require('http')
 const {Server} = require('socket.io')
-
+const message = require('./src/models/message')
 
 const app = express()
 const server = http.createServer(app)
@@ -24,9 +24,20 @@ io.on("connection",(socket)=>{
     console.log(`socket ${socket.id} joined room`)
   })
 
-  socket.on("sendMessage",(data)=>{
-  console.log("mesageRecieved",data)
- io.in(data.conversation).emit("receiveMessage", data);
+  socket.on("sendMessage",async(data)=>{
+    try {
+       console.log("mesageRecieved",data)
+      const newMessage = await message.create({
+        conversationID : data.conversationId,
+        sender: data.sender,
+        text:data.text,
+      })
+
+ io.in(data.conversation).emit("receiveMessage", newMessage);
+    } catch (error) {
+      console.log("error in saving message",error)
+    }
+ 
 
 })
   socket.on("disconnect",()=>{
