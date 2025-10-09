@@ -75,25 +75,27 @@ const Message = ({ conversation, Theme }) => {
           "Unknown"}
       </div>
 
+      <div className="flex flex-col h-full p-4 overflow-y-auto bg-gray-100">
+  {Messages.map((msg, index) => {
+    const isSender = msg.sender.toString() === User.id.toString();
+    return (
       <div
-        className={`flex-1 overflow-y-auto p-4 ${
-          Theme ? "bg-black text-white" : "bg-gray-50 text-black"
-        }`}
+        key={index}
+        className={`flex mb-2 ${isSender ? "justify-end" : "justify-start"}`}
       >
-        {Messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`mb-2 w-max p-2 rounded ${
-              msg.sender.toString() === User.id.toString()
-                ? "bg-gray-300"
-                : "ml-auto bg-blue-500 text-white"
-            }`}
-          >
-            {msg.text}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
+        <div
+          className={`max-w-[70%] p-3 rounded-2xl break-words text-sm shadow-sm ${
+            isSender
+              ? "bg-green-600 text-white rounded-tr-none"
+              : "bg-gray-300 text-black rounded-tl-none"
+          }`}
+        >
+          {msg.text}
+        </div>
       </div>
+    );
+  })}
+</div>
 
       <div className="p-3 border-t bg-white flex">
         <input
