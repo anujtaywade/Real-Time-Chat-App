@@ -86,8 +86,8 @@ const Message = ({ conversation, Theme }) => {
         <div
           className={`max-w-[70%] p-3 rounded-2xl break-words text-sm shadow-sm ${
             isSender
-              ? "bg-green-600 text-white rounded-tr-none"
-              : "bg-gray-300 text-black rounded-tl-none"
+              ? "bg-green-600 text-white rounded"
+              : "bg-gray-300 text-black rounded"
           }`}
         >
           {msg.text}
