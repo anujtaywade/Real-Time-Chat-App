@@ -27,7 +27,11 @@ const userSchema = new mongoose.Schema(
                 type : String,
                 unique : true,
                 default : ()=>nanoid(8)
-            }
+            },
+
+         friends : [{
+            type : mongoose.Schema.Types.ObjectId, ref:"user"
+         }]
         
     },
     {timestamps : true},

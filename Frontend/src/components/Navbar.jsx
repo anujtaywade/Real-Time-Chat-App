@@ -25,6 +25,7 @@ const Navbar = ({Theme , setTheme}) => {
   const [ThemeOpen, setThemeOpen] = useState(false);
   const [LogoutOpen, setLogoutOpen] = useState(false);
   const [AddFriendOpen, setAddFriendOpen] = useState(false);
+  const [Addfriend, setAddfriend] = useState();
  
 
 const handleLogout=()=>{
