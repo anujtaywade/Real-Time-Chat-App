@@ -66,6 +66,10 @@ const Message = ({ conversation, Theme }) => {
 
     socket.emit("sendMessage", newMessage);
     setMessage("");
+
+     setTimeout(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, 100);
   };
 
   return (
@@ -95,6 +99,8 @@ const Message = ({ conversation, Theme }) => {
       </div>
     );
   })}
+
+  <div ref={messagesEndRef} />
 </div>
 
       <div className="p-3 border-t bg-white flex">
