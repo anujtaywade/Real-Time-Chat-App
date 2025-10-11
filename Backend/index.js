@@ -82,6 +82,7 @@ mongoose.connect(process.env.MONGO_URL, {
 app.use("/auth", require("./src/routes/authRouth"));
 app.use("/", require("./src/routes/conversationRouth"));
 app.use("/", require("./src/routes/messageRouth"));
+app.use("/",require("./src/routes/addFriendsRouth"))
 
 app.get('/', (req, res) => {
   res.send("Backend is running");
