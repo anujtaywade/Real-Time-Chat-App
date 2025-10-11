@@ -44,7 +44,17 @@ const AddFriend = ({UserId}) => {
     toast.success(res.data.Message || "Friend added successfully")
     setFriendId ("")
   } catch (error) {
-    console.log(error.response?.data?.Message || "failed to add friend")
+     if (error.response) {
+        if (error.response.status === 404) {
+          toast.error("User not found");
+        } else if (error.response.status === 400) {
+          toast.error(error.response.data.message || "Already friends");
+        } else {
+          toast.error(error.response.data.message || "Failed to add friend");
+        }
+      } else {
+        toast.error("Network or server error");
+      }
     
   }
   finally{
