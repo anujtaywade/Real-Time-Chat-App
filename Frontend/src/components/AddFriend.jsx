@@ -73,16 +73,19 @@ const AddFriend = ({UserId}) => {
                     {AddFriendOpen && (
         <div className="absolute right-40 top-5 w-64 bg-white border border-gray-200 rounded-2xl shadow-xl p-4 z-50 transition-all duration-200">
        
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="text-lg font-semibold text-gray-800">Add Friend</h3>
-            <button
-              onClick={() => setAddFriendOpen(false)} 
-              className="text-gray-400 hover:text-gray-600"
-            >
-              ✕
-            </button>
-          </div>
-      
+         <div className="flex justify-between items-center mb-1">
+  <h3 className="text-lg font-semibold text-gray-800">Add Friend</h3>
+ 
+  <button
+    onClick={() => setAddFriendOpen(false)}
+    className="text-gray-400 hover:text-gray-600 ml-auto"
+  >
+    ✕
+  </button>
+</div>
+       <p className="text-xs text-gray-500 italic mb-2">
+    Tip: Refresh page after adding a friend
+  </p>
          
           <input
             type="text"
