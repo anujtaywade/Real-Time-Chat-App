@@ -13,8 +13,10 @@ const Navbar = ({Theme , setTheme}) => {
   const location = useLocation();
   const absoluteLoation = ["/", "/signup", "/login"];
   const isAbsolute = absoluteLoation.includes(location.pathname);
-  const {User , logout} = useContext(AuthContext)
   const navigate = useNavigate()
+
+  const {User , logout} = useContext(AuthContext)
+
 
   console.log(User)
 
@@ -64,9 +66,12 @@ const handleCopiedText =()=>{
         </h1>
 
      
-        {!isAbsolute && User && (
-  <AddFriend childern={User._id} />
+        {!isAbsolute && User &&  (
+  <AddFriend UserId={User.id} />
+  
 )}
+
+
       
        {!isAbsolute && User && (
          <div>

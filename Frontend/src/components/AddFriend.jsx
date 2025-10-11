@@ -1,16 +1,56 @@
+import api from 'axios';
 import React from 'react'
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { IoPersonAddSharp } from "react-icons/io5";
+import { toast, Toaster } from "react-hot-toast";
 
-const AddFriend = ({childern}) => {
+
+
+const AddFriend = ({UserId}) => {
 
       const [AddFriendOpen, setAddFriendOpen] = useState(false);
   const [FriendId, setFriendId] = useState("");
   const [Loading, setLoading] = useState(false);
-  const [Message, setMessage] = useState();
+  const [Message, setMessage] = useState("");
 
-  const 
+  useEffect(() => {
+    if (Message){
+        const timer=setTimeout(()=>
+            toast.success(""),3000)
+        return()=>clearTimeout(timer)
+    }
+  }, [Message]);
 
+  const handleAddFriend=async()=>{
+    if (!FriendId.trim()){ 
+        toast.error("Enter Zoroa Id")
+        return ;
+    }
+    
+     if (!UserId) {
+      toast.error("User not found");
+      return;
+    }
+
+     try {
+        setLoading(true)
+        const addFriendURL = import.meta.env.VITE_ADDFRIEND_URL
+    const res = await api.post(`${addFriendURL}/${UserId}`,
+        
+        {friendUniqueId: FriendId},
+        {withCredentials : true }
+    )
+    console.log(`${addFriendURL}/${UserId}`);
+    toast.success(res.data.Message || "Friend added successfully")
+    setFriendId ("")
+  } catch (error) {
+    console.log(error.response?.data?.Message || "failed to add friend")
+    
+  }
+  finally{
+    setLoading(false)
+  }
+  }
 
   return (
     <div>
@@ -36,6 +76,8 @@ const AddFriend = ({childern}) => {
          
           <input
             type="text"
+            value={FriendId}
+            onChange={(e)=>setFriendId(e.target.value)}
             placeholder="Enter Zoroa ID"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-sm mb-3"
           />
@@ -50,14 +92,22 @@ const AddFriend = ({childern}) => {
             </button>
       
             <button
+            onClick={handleAddFriend}
+            disabled={Loading}
               className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 shadow-sm text-sm transition-all"
             >
-              Add
+              {Loading? "Adding" : "Add"}
             </button>
           </div>
         </div>
       )}
-                    
+                    {
+                        Message && (
+                            <p className='text-xs mt-2 text-gray-700 text-center'>
+                                {Message}
+                            </p>
+                        )
+                    }
                   </div>
       
              
