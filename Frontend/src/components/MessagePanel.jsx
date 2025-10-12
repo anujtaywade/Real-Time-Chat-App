@@ -67,7 +67,7 @@ const Message = ({ conversation, Theme }) => {
     };
 
     try {
-       // ✅ 1. Save message in DB via backend API
+ 
     const MESSAGE_URL = import.meta.env.VITE_MESSAGE_URL;
     const res = await axios.post(`${MESSAGE_URL}`, newMessage, {
       withCredentials: true,
