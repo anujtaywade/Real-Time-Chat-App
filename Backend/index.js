@@ -25,6 +25,7 @@ io.on("connection", (socket) => {
 
 
   socket.on("joinRoom", (roomId) => {
+    
     socket.join(roomId);
     console.log(`Socket ${socket.id} joined room ${roomId}`);
   });
@@ -41,14 +42,11 @@ io.on("connection", (socket) => {
         createdAt: new Date(),
       });
 
-   
-        io.in(data.conversationId).emit("receiveMessage", {
-      _id: newMessage._id.toString(),
-      conversationId: newMessage.conversationId.toString(),
-      sender: newMessage.sender.toString(),
-      text: newMessage.text,
-      createdAt: newMessage.createdAt,
-    });
+
+      const messageObj = newMessage.toObject();
+       // Emit to everyone in the room EXCEPT the sender
+io.in(data.conversationId).except(socket.id).emit("receiveMessage", messageObj);
+
 
     
     } catch (error) {

@@ -36,12 +36,16 @@ const Message = ({ conversation, Theme }) => {
  
   useEffect(() => {
     if (!socket || !conversation?._id) return;
+      console.log("Joining room:", conversation._id);
 
     socket.emit("joinRoom", conversation._id);
 
     const handleReceive = (data) => {
+      console.log("Received message in socket:", data);
       if (data.conversationId.toString() === conversation._id.toString()) {
-        setMessages((prev) => [...prev, data]);
+        if (data.sender.toString() !== User.id.toString()) {
+      setMessages((prev) => [...prev, data]);
+    }
       }
     };
 
@@ -52,24 +56,43 @@ const Message = ({ conversation, Theme }) => {
     };
   }, [socket, conversation]);
 
-  const handleSend = () => {
+  const handleSend =async () => {
     if (!Message.trim() || !socket) return;
 
     const newMessage = {
       conversationId: conversation._id,
-      sender: User.id,
+      senderId: User.id,
       text: Message,
       createdAt: new Date(),
     };
 
+    try {
+       // ✅ 1. Save message in DB via backend API
+    const MESSAGE_URL = import.meta.env.VITE_MESSAGE_URL;
+    const res = await axios.post(`${MESSAGE_URL}`, newMessage, {
+      withCredentials: true,
+    });
 
+    const savedMessage = res.data.date; 
 
-    socket.emit("sendMessage", newMessage);
-    setMessage("");
+     setMessages((prev) => [...prev, savedMessage]);
 
-     setTimeout(() => {
+      socket.emit("sendMessage", savedMessage);
+      setMessage("");
+
+       setTimeout(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, 100);
+    } catch (error) {
+      console.log("Error sending message",error)
+    }
+
+
+
+   
+    
+
+    
   };
 
   return (

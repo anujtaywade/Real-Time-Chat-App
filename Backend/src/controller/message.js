@@ -24,7 +24,7 @@ exports.sendMessage = async (req,res) => {
             updatedAt : Date.now()}
         )
 
-        res.status(201).json({message:"message sent successfully",date:newMessage})
+        res.status(201).json({message:"message sent successfully", date:newMessage})
 
 
     } catch (error) {
