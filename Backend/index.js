@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
 
 
       const messageObj = newMessage.toObject();
-       // Emit to everyone in the room EXCEPT the sender
+   
 io.in(data.conversationId).except(socket.id).emit("receiveMessage", messageObj);
 
 
