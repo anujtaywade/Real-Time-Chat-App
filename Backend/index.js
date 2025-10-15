@@ -34,7 +34,7 @@ socket.on("sendMessage", (data) => {
   try {
     console.log("Message received:", data);
     
-    // Just broadcast to other users - NO database save needed!
+   
     socket.to(data.conversationId).emit("receiveMessage", data);
     
   } catch (error) {

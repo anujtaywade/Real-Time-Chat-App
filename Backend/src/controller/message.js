@@ -41,10 +41,10 @@ exports.getMessage = async (req,res) => {
     try {
         const {conversationId} = req.params
 
-        // ✅ Populate sender info
+       
 const findMessage = await message
   .find({conversationId: conversationId})
-  .populate("sender", "_id name")  // Add this line
+  .populate("sender", "_id name")  
   .sort({createdAt: 1})
   .limit(50);
         
