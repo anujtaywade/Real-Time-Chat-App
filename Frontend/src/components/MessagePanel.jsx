@@ -44,7 +44,7 @@ const Message = ({ conversation, Theme }) => {
   console.log("Received message:", data);
   
   if (data.conversationId.toString() === conversation._id.toString()) {
-    // Check if sender is populated (has _id property) or just an ID
+
     const senderId = data.sender?._id || data.sender;
     
     if (senderId?.toString() !== User.id.toString()) {
