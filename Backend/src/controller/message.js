@@ -18,13 +18,17 @@ exports.sendMessage = async (req,res) => {
             text
         })
 
+        const populatedMessage = await message
+      .findById(newMessage._id)
+      .populate("sender", "_id name");
+
         await conversation.findOneAndUpdate(
             {_id: conversationId},
             {lastMessage : newMessage._id,
             updatedAt : Date.now()}
         )
 
-        res.status(201).json({message:"message sent successfully", date:newMessage})
+        res.status(201).json(populatedMessage)
 
 
     } catch (error) {
@@ -37,12 +41,14 @@ exports.getMessage = async (req,res) => {
     try {
         const {conversationId} = req.params
 
-        const findMessage = await message
-        .find({conversationId:conversationId})
-        .sort({createdAt: 1})
-        .limit(50) 
+        // ✅ Populate sender info
+const findMessage = await message
+  .find({conversationId: conversationId})
+  .populate("sender", "_id name")  // Add this line
+  .sort({createdAt: 1})
+  .limit(50);
         
-        res.status(201).json(findMessage)
+        res.status(200).json(findMessage)
 
     } catch (error) {
         console.log(error)

@@ -30,29 +30,18 @@ io.on("connection", (socket) => {
     console.log(`Socket ${socket.id} joined room ${roomId}`);
   });
 
-  socket.on("sendMessage", async (data) => {
-    try {
-      console.log("Message received:", data);
-
-   
-      const newMessage = await Message.create({
-        conversationId:data.conversationId,
-        sender:data.sender,
-        text: data.text,
-        createdAt: new Date(),
-      });
-
-
-      const messageObj = newMessage.toObject();
-   
-io.in(data.conversationId).except(socket.id).emit("receiveMessage", messageObj);
-
-
+socket.on("sendMessage", (data) => {
+  try {
+    console.log("Message received:", data);
     
-    } catch (error) {
-      console.log("Error saving message:", error);
-    }
-  });
+    // Just broadcast to other users - NO database save needed!
+    socket.to(data.conversationId).emit("receiveMessage", data);
+    
+  } catch (error) {
+    console.log("Error broadcasting message:", error);
+  }
+});
+
 
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
