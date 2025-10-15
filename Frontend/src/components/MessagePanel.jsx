@@ -40,14 +40,18 @@ const Message = ({ conversation, Theme }) => {
 
     socket.emit("joinRoom", conversation._id);
 
-    const handleReceive = (data) => {
-      console.log("Received message in socket:", data);
-      if (data.conversationId.toString() === conversation._id.toString()) {
-        if (data.sender.toString() !== User.id.toString()) {
+  const handleReceive = (data) => {
+  console.log("Received message:", data);
+  
+  if (data.conversationId.toString() === conversation._id.toString()) {
+    // Check if sender is populated (has _id property) or just an ID
+    const senderId = data.sender?._id || data.sender;
+    
+    if (senderId?.toString() !== User.id.toString()) {
       setMessages((prev) => [...prev, data]);
     }
-      }
-    };
+  }
+};
 
     socket.on("receiveMessage", handleReceive);
 
@@ -73,7 +77,7 @@ const Message = ({ conversation, Theme }) => {
       withCredentials: true,
     });
 
-    const savedMessage = res.data.date; 
+    const savedMessage = res.data; 
 
      setMessages((prev) => [...prev, savedMessage]);
 
@@ -92,6 +96,11 @@ const Message = ({ conversation, Theme }) => {
    
     
 
+
+
+
+
+    
     
   };
 
@@ -104,10 +113,11 @@ const Message = ({ conversation, Theme }) => {
 
       <div className="flex flex-col h-full p-4 overflow-y-auto bg-gray-100">
   {Messages.map((msg, index) => {
-    const isSender = msg.sender.toString() === User.id.toString();
+   const isSender = msg.sender?._id?.toString() === User.id.toString() || 
+                          msg.sender?.toString() === User.id.toString();  
     return (
       <div
-        key={index}
+        key={msg._id || index}
         className={`flex mb-2 ${isSender ? "justify-end" : "justify-start"}`}
       >
         <div
