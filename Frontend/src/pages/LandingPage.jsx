@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { MonitorSmartphone  ,Zap  , UserLock  } from "lucide-react";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -163,28 +164,21 @@ const LandingPage = () => {
           {[
             {
               icon: (
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+               <MonitorSmartphone  className='size-10' />
               ),
-              title: "Location Based",
-              description: "Find and connect with people in your area instantly"
+              title: "Cross Platform",
+              description: "Find and connect with people with your mobile devices"
             },
             {
               icon: (
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+                <Zap className='size-10' />
               ),
               title: "Real-time Chat",
               description: "Instant messaging with zero delays and notifications"
             },
             {
               icon: (
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
+               <UserLock className='size-10'/>
               ),
               title: "Secure & Private",
               description: "Your conversations are encrypted and protected"
