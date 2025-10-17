@@ -19,7 +19,7 @@ const LandingPage = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-[#386641] via-[#527a4a] to-[#89B153] overflow-hidden">
       
-      {/* Animated Background Blobs */}
+    
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
           className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl transition-transform duration-1000"
@@ -47,7 +47,7 @@ const LandingPage = () => {
         />
       </div>
 
-      {/* Navigation Bar */}
+   
       <nav className="relative z-50 flex justify-between items-center px-8 md:px-16 py-6">
         <div className="flex items-center gap-3">
          
@@ -65,10 +65,10 @@ const LandingPage = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-8 md:px-16 py-12 lg:py-20 gap-12">
         
-        {/* Left Content */}
+    
         <div 
           className={`flex-1 space-y-6 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -77,7 +77,7 @@ const LandingPage = () => {
    
          
 
-          {/* Main Heading */}
+         
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Find your nearest
             <span className="block mt-2 bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200 bg-clip-text text-transparent animate-pulse">
@@ -86,25 +86,20 @@ const LandingPage = () => {
             <span className="block mt-2">and start chat together</span>
           </h1>
 
-          {/* Subheading */}
+      
           <p className="text-xl text-white/80 max-w-xl leading-relaxed">
             Connect instantly with people nearby. Build friendships, share moments, and never feel alone again.
           </p>
 
-          {/* CTA Buttons */}
+         
           <div className="flex flex-col sm:flex-row gap-4 ">
             <Link to="/login">
-              <button className="group relative px-8 py-4 bg-black text-white rounded-xl font-semibold text-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <button className="group relative px-8 py-4 bg-black text-white rounded-xl font-semibold text-lg overflow-hidden hover:text-black hover:bg-white shadow-2xl transition-all duration-300 ">
                 <span className="relative z-10 flex items-center gap-2">
-                  Get started
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+                  Get started ➜
+                  
                 </span>
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-black font-semibold">
-                  Get started →
-                </span>
+                
               </button>
             </Link>
             
@@ -113,7 +108,7 @@ const LandingPage = () => {
          
         </div>
 
-        {/* Right Content - Image Section */}
+  
         <div 
           className={`flex-1 relative transition-all duration-1000 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -121,10 +116,8 @@ const LandingPage = () => {
         >
           <div className="relative w-full max-w-lg mx-auto">
             
-            {/* Main Image Container */}
+      
             <div className="relative">
-              
-              {/* Image Card */}
               <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl">
                 <img
                   className="w-full h-96 object-cover rounded-2xl opacity-90 hover:opacity-100 transition-opacity"
@@ -132,7 +125,7 @@ const LandingPage = () => {
                   alt="Chat Preview"
                 />
                 
-                {/* Floating Chat Bubbles */}
+           
                 <div className="absolute -left-4 top-20 bg-white rounded-2xl p-4 shadow-xl animate-bounce" style={{animationDuration: '3s'}}>
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#386641] to-[#89B153]"></div>
@@ -154,14 +147,12 @@ const LandingPage = () => {
                 </div>
               </div>
             </div>
-
-            {/* Stats Cards */}
            
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
+
       <div className="relative z-10 px-8 md:px-16 py-20">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">Why Choose Zoroa?</h2>
