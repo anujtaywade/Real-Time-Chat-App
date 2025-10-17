@@ -64,7 +64,7 @@ const Login = () => {
 
     
       <img 
-        className={`size-64 absolute top-[10%] right-[10%] md:right-[20%] transition-all duration-1000 ${
+        className={`size-60 absolute top-[10%] right-[10%] md:right-[40%] md:top-[-10%] transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
         }`}
         src="\gojo.png" 
