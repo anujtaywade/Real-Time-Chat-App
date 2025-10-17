@@ -111,7 +111,7 @@ const Message = ({ conversation, Theme }) => {
           "Unknown"}
       </div>
 
-      <div className="flex flex-col h-full p-4 overflow-y-auto bg-gray-100">
+      <div className={`flex flex-col h-full p-4 overflow-y-auto ${Theme?"bg-black" : "bg- bg-gray-100"}`}>
   {Messages.map((msg, index) => {
    const isSender = msg.sender?._id?.toString() === User.id.toString() || 
                           msg.sender?.toString() === User.id.toString();  

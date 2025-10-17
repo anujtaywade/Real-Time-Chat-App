@@ -17,7 +17,7 @@ const ChatApp = () => {
       
       
       <div className='flex flex-1'> 
-        <ChatList selectedConv={selectedConv} setSelectedConv={setSelectedConv}/>
+        <ChatList selectedConv={selectedConv} setSelectedConv={setSelectedConv}  Theme={Theme}/>
       
       <Toaster position='bottom-center' reverseOrder={false} />
 

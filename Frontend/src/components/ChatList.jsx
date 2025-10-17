@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import api from "../api/axios";
 
 
-const ChatList = ({selectedConv, setSelectedConv}) => {
+const ChatList = ({selectedConv, setSelectedConv , Theme}) => {
   const { User } = useContext(AuthContext);
   const [allConversation, setAllConversation] = useState([]);
 

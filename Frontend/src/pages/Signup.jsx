@@ -1,105 +1,138 @@
-import React from 'react'
-import { useState } from 'react'
-import  api  from "../api/axios.jsx";
-import { Link,useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import api from "../api/axios.jsx";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
-    const [formData, setformData] = useState({
-        name:"",
-        email:"",
-        password:""
-    });
+  const [formData, setformData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
 
-    const handleChange = (e)=>{
-        setformData({...formData,[e.target.name]:e.target.value})
+  useEffect(() => {
+    setIsVisible(true);
+
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const handleChange = (e) => {
+    setformData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      await api.post("/auth/signup", formData);
+      navigate("/login");
+    } catch (err) {
+      setError(err.response?.data?.error || err.response?.data?.message || "Signup failed");
     }
-
-    const handleSignup=async (e) => {
-      e.preventDefault();
-      try {
-        await api.post("/auth/signup",formData)
-        navigate("/login")
-      } catch (err) {
-        setError(err.response?.data?.error) ||
-        setError(err.response?.data?.message)
-      }
-    }
+  };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#386641] to-[#89B153]">
-      
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-[400px] mt-20">
-        <h2 className="text-3xl font-bold text-black text-center mb-2">
-          Create Account
-        </h2>
-        <h1 className="text-lg text-gray-600 text-center mb-4">
-          Welcome to <span className='font-bold'>Zoroa</span>
-        </h1>
-
-         <div className='text-s flex items-center justify-center text-red-500'>
-        {error}
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#386641] via-[#527a4a] to-[#89B153] overflow-hidden">
+      {/* Animated Background Blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl transition-transform duration-1000"
+          style={{
+            top: "15%",
+            left: "5%",
+            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+          }}
+        />
+        <div
+          className="absolute w-80 h-80 bg-yellow-300/20 rounded-full blur-3xl transition-transform duration-1000"
+          style={{
+            bottom: "15%",
+            right: "10%",
+            transform: `translate(${-mousePosition.x * 0.015}px, ${-mousePosition.y * 0.015}px)`,
+          }}
+        />
       </div>
 
-        <form onSubmit={handleSignup} className="space-y-4">
-          <div>
-            <label className="block font-medium">Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#3C7A89]"
-            />
-          </div>
+      {/* Decorative Character Image */}
+      <img
+        src="/luffy.PNG"
+        alt="Character"
+        className={`absolute top-[8%] right-[8%] md:right-[18%] w-40 transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
+        }`}
+      />
 
-          <div>
-            <label className="block font-medium">Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#3C7A89]"
-            />
-          </div>
+      {/* Signup Form */}
+      <div
+        className={`relative bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-8 w-[90%] max-w-md transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <h1 className="text-4xl font-extrabold text-white text-center mb-6">
+          Zoroa Signup
+        </h1>
 
-          <div>
-            <label className="block font-medium">Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#3C7A89]"
-            />
-          </div>
+        <form onSubmit={handleSignup} className="flex flex-col gap-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="p-3 rounded-lg outline-none bg-white/20 text-white placeholder-white/70 focus:bg-white/30 transition-all"
+          />
 
-          <p>
-            Already have an Account?  <Link to="/login" className='text-[#A7C957] underline'>login</Link>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="p-3 rounded-lg outline-none bg-white/20 text-white placeholder-white/70 focus:bg-white/30 transition-all"
+          />
 
-          </p>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="p-3 rounded-lg outline-none bg-white/20 text-white placeholder-white/70 focus:bg-white/30 transition-all"
+          />
+
+          {error && <p className="text-red-300 text-sm text-center">{error}</p>}
 
           <button
             type="submit"
-            className="w-full bg-[#6A994E] text-white py-2 rounded-lg hover:bg-[#386641] transition"
+            className="mt-4 bg-black text-white py-3 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 shadow-md hover:shadow-lg"
           >
-            Signup
+            Sign Up
           </button>
         </form>
+
+        <p className="text-center text-white/80 text-sm mt-5">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-yellow-200 hover:text-yellow-300 font-medium"
+          >
+            Login
+          </Link>
+        </p>
       </div>
-      <img className='size-40 w-fit absolute bottom-[75%]' 
-      src="\Inosuke.png" alt="" />
     </div>
   );
 };
 
-export default Signup
+export default Signup;

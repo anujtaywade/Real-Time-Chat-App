@@ -201,7 +201,7 @@ const handleCopiedText =()=>{
 
               <button
                onClick={()=>{setTheme(true) || setThemeOpen(false) || setOpen(false)}}
-              className="flex items-center w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm ">
+              className="flex items-center  w-full px-4 py-2 mb-2 rounded-lg hover:bg-gray-100 transition shadow-sm ">
                 Dark Mode 
               </button>
               
