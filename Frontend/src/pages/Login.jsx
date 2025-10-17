@@ -64,8 +64,8 @@ const Login = () => {
 
     
       <img 
-        className={`size-56 absolute top-[10%] right-[10%] md:right-[42%] md:top-[-6%] transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+        className={`size-56 absolute top-[10%] right-[10%] md:right-[42%] md:top-[-5%] transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-2' : 'opacity-0 -translate-y-6'
         }`}
         src="\gojo.png" 
         alt="" 
@@ -73,7 +73,7 @@ const Login = () => {
 
      
       <div 
-        className={`relative z-10 bg-white/95 backdrop-blur-lg p-8 md:p-8 rounded-3xl shadow-2xl w-[90%] max-w-[440px] border border-white/20 transition-all duration-1000 ${
+        className={`relative z-10 bg-white/95 backdrop-blur-lg mt-10 p-8 md:p-8 rounded-3xl shadow-2xl w-[90%] max-w-[440px] border border-white/20 transition-all duration-1000 ${
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
       >

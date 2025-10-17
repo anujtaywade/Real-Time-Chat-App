@@ -41,7 +41,7 @@ const Signup = () => {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#386641] via-[#527a4a] to-[#89B153] overflow-hidden">
-      {/* Animated Background Blobs */}
+ 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl transition-transform duration-1000"
@@ -61,18 +61,18 @@ const Signup = () => {
         />
       </div>
 
-      {/* Decorative Character Image */}
+     
       <img
-        src="/luffy.PNG"
+        src="/Inosuke.png"
         alt="Character"
-        className={`absolute top-[8%] right-[8%] md:right-[18%] w-40 transition-all duration-1000 ${
+        className={`size-40  absolute top-[8%] right-[8%] md:right-[42%] md:top-[4%] w-fit transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
         }`}
       />
 
-      {/* Signup Form */}
+   
       <div
-        className={`relative bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-8 w-[90%] max-w-md transition-all duration-1000 ${
+        className={`relative bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl mt-10 p-8 w-[90%] max-w-md transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
@@ -125,7 +125,7 @@ const Signup = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-yellow-200 hover:text-yellow-300 font-medium"
+            className="text-yellow-200 hover:text-yellow-300 font-medium underline"
           >
             Login
           </Link>
