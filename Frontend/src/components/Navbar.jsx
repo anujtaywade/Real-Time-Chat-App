@@ -131,10 +131,10 @@ const Navbar = ({ Theme, setTheme }) => {
               </button>
 
               <div className="flex flex-col items-center mb-6">
-                <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full p-5 mb-4 shadow-lg">
+                <div className="bg-gradient-to-br from-[#386641] to-[#89B153] rounded-full p-5 mb-4 shadow-lg">
                   <FaUserCircle className="text-7xl text-white" />
                 </div>
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-[#386641] to-[#44641a] bg-clip-text text-transparent">
                   {User.name}
                 </h2>
                 <p className="text-gray-500 text-sm mt-1">{User.email}</p>
@@ -161,7 +161,7 @@ const Navbar = ({ Theme, setTheme }) => {
                   </div>
                   <button
                     onClick={handleCopiedText}
-                    className="p-2 hover:bg-purple-50 rounded-lg transition-colors text-purple-600"
+                    className="p-2 hover:bg-purple-50 rounded-lg transition-colors text-green-700"
                   >
                     <FaRegCopy className="text-xl" />
                   </button>
@@ -181,7 +181,7 @@ const Navbar = ({ Theme, setTheme }) => {
                 ✕
               </button>
 
-              <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
                 Select Theme
               </h2>
 
@@ -218,9 +218,8 @@ const Navbar = ({ Theme, setTheme }) => {
                 ✕
               </button>
               <div className="text-center">
-                <div className="mb-4 text-6xl">👋</div>
-                <h2 className="text-2xl font-bold mb-2 text-gray-800">Leaving so soon?</h2>
-                <p className="text-gray-500 mb-6 text-sm">Are you sure you want to logout?</p>
+      
+                <p className="text-gray-500 mb-6 text-xl font-bold">Are you sure you want to logout?</p>
                 <button
                   onClick={handleLogout}
                   className="w-full py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl hover:from-red-600 hover:to-red-700 font-semibold shadow-lg transition-all transform hover:scale-105"

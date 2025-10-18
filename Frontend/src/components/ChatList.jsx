@@ -41,7 +41,7 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
         </h1>
       </div>
 
-      {/* Chat List */}
+ 
       <div className="flex-1 overflow-y-auto">
         {loading ? (
           <div className="flex flex-col items-center justify-center p-8 space-y-3">
@@ -71,7 +71,7 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
                       : "hover:bg-gray-100"
                   }`}
                 >
-                  {/* Avatar */}
+             
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md ${
                     isSelected 
                       ? "bg-gradient-to-br from-purple-600 to-indigo-600"
@@ -80,7 +80,7 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
                     {participant?.name?.charAt(0).toUpperCase() || "?"}
                   </div>
 
-                  {/* Chat Info */}
+                
                   <div className="flex-1 min-w-0">
                     <h3 className={`font-semibold text-base truncate ${
                       isSelected ? "text-purple-900" : "text-gray-800"
@@ -92,7 +92,7 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
                     </p>
                   </div>
 
-                  {/* Indicator */}
+                
                   {isSelected && (
                     <div className="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></div>
                   )}

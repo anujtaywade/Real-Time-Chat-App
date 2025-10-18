@@ -90,7 +90,7 @@ const Message = ({ conversation, Theme }) => {
 
   return (
     <div className="flex flex-col h-screen w-full pt-[70px]">
-      {/* Chat Header */}
+
       <div className="sticky top-[70px] z-40 bg-gradient-to-r from-purple-600 to-indigo-600 shadow-lg">
         <div className="p-4 flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-xl shadow-md">
@@ -100,12 +100,12 @@ const Message = ({ conversation, Theme }) => {
             <h2 className="text-xl font-bold text-white">
               {participant?.name || "Unknown"}
             </h2>
-            <p className="text-xs text-purple-100">Online</p>
+            
           </div>
         </div>
       </div>
 
-      {/* Messages Area */}
+ 
       <div
         className={`flex flex-col flex-1 p-6 overflow-y-auto ${
           Theme ? "bg-gray-900" : "bg-gradient-to-b from-gray-50 to-white"
@@ -158,7 +158,7 @@ const Message = ({ conversation, Theme }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area */}
+  
       <div className="p-4 bg-white border-t border-gray-200 shadow-lg">
         <div className="flex gap-3 max-w-4xl mx-auto">
           <input
