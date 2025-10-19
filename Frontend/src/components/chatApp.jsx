@@ -1,43 +1,94 @@
-
 import React from "react";
 import ChatList from "./ChatList";
 import MessagePanel from "./MessagePanel";
 import Navbar from "./Navbar";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { Toaster } from "react-hot-toast";
 
 const ChatApp = () => {
   const [selectedConv, setSelectedConv] = useState(null);
-  const [Theme, setTheme] = useState(false);
+ 
+  const [Theme, setTheme] = useState(false); 
+  const [showSidebar, setShowSidebar] = useState(true);
+
+ 
+  useEffect(() => {
+    if (selectedConv && window.innerWidth < 768) {
+      setShowSidebar(false);
+    }
+   
+  }, [selectedConv]); 
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-purple-50 to-indigo-50">
-      <Navbar Theme={Theme} setTheme={setTheme} />
+    
+    <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
+      <Navbar Theme={Theme} setTheme={setTheme} onMenuClick={() => setShowSidebar(!showSidebar)} />
 
-      <div className="flex flex-1 pt-[70px]">
-        <ChatList selectedConv={selectedConv} setSelectedConv={setSelectedConv} Theme={Theme} />
-
-        <Toaster position="bottom-center" reverseOrder={false} />
-
-        {selectedConv ? (
-          <MessagePanel conversation={selectedConv} Theme={Theme} setTheme={setTheme} />
-        ) : (
-          <div className="flex-1 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-white">
-            <div className="text-center space-y-6 p-8">
-              <div className="text-8xl animate-bounce">💬</div>
-              <div>
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-[#386641] to-[#89B153] bg-clip-text text-transparent mb-3">
-                  Select a Chat
-                </h2>
-                <p className="text-gray-500 text-lg">
-                  Choose a conversation to start messaging
-                </p>
-              </div>
-              
-            </div>
+    
+      <div className="flex flex-1 overflow-hidden relative">
+        
+       
+        <div className={`
+          ${showSidebar ? 'translate-x-0' : '-translate-x-full'}
+          md:translate-x-0 transition-transform duration-300 ease-in-out
+          fixed md:relative z-30 h-full pt-[70px] 
+          w-full md:w-80
+          bg-white dark:bg-gray-800 shadow-xl md:shadow-none 
+        `}>
+   
+          <div className="h-full overflow-y-auto"> 
+             <ChatList 
+                selectedConv={selectedConv} 
+                setSelectedConv={(conv) => {
+                  setSelectedConv(conv);
+            
+                  if (window.innerWidth < 768) setShowSidebar(false);
+                }} 
+                Theme={Theme} 
+             />
           </div>
+        </div>
+
+   
+        {showSidebar && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+            onClick={() => setShowSidebar(false)}
+          />
         )}
+
+       
+        <div className="flex-1 overflow-hidden relative">
+            {selectedConv ? (
+                
+                <MessagePanel 
+                    conversation={selectedConv} 
+                    Theme={Theme}
+                    onBack={() => {
+                        setSelectedConv(null);
+                        setShowSidebar(true); 
+                    }}
+                />
+            ) : (
+               
+                <div className="flex flex-1 flex-col items-center justify-center h-full bg-white dark:bg-gray-700">
+                    <div className="text-center space-y-6 p-8">
+                        <div className="text-8xl animate-pulse text-purple-500">💬</div>
+                        <div>
+                            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3">
+                                Select a Chat
+                            </h2>
+                            <p className="text-gray-500 dark:text-gray-300 text-lg">
+                                Choose a conversation to start messaging
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+        
       </div>
+      <Toaster />
     </div>
   );
 };
