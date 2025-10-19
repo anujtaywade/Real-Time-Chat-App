@@ -10,6 +10,7 @@ const ChatApp = () => {
  
   const [Theme, setTheme] = useState(false); 
   const [showSidebar, setShowSidebar] = useState(true);
+  
 
  
   useEffect(() => {
