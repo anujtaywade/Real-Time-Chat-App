@@ -65,7 +65,7 @@ const Signup = () => {
       <img
         src="/Inosuke.png"
         alt="Character"
-        className={`size-40  absolute top-[8%] right-[8%] md:right-[42%] md:top-[4%] w-fit transition-all duration-1000 ${
+        className={`size-40  absolute top-[13%] right-[17%] md:right-[42%] md:top-[4%] lg:top-[25%] lg:right-[36%] w-fit transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
         }`}
       />
