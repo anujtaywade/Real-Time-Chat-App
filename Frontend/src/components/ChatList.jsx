@@ -33,7 +33,7 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
   }, [User]);
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className={`flex flex-col h-full  ${Theme? "bg-gray-800 " : "bg-white"}`}>
       <div className="p-5 bg-gradient-to-r from-purple-600 to-indigo-600 border-b border-purple-700">
         <h1 className="text-2xl font-bold text-white flex items-center gap-2">
           <span>💬</span>
@@ -64,11 +64,12 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
                 <div
                   key={conv.uniqueKey}
                   onClick={() => setSelectedConv(conv)}
-                  className={`mx-2 my-1 p-4 cursor-pointer rounded-xl transition-all duration-200 flex items-center gap-3 group ${
+                  className={` mx-2 my-1 p-4 cursor-pointer rounded-xl transition-all duration-200 flex items-center gap-3 group ${
                     isSelected
                       ? "bg-gradient-to-r from-purple-100 to-indigo-100 shadow-md border-l-4 border-purple-600"
                       : "hover:bg-gray-100"
-                  }`}
+                  } ` 
+                }
                 >
                   <div
                     className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md ${
@@ -84,7 +85,7 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
                     <h3
                       className={`font-semibold text-base truncate ${
                         isSelected ? "text-purple-900" : "text-black"
-                      }`}
+                      } ${Theme? "text-white" : "text-black"}` }
                     >
                       {participant?.name || "Unknown"}
                     </h3>

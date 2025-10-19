@@ -37,7 +37,7 @@ const ChatApp = () => {
           bg-white dark:bg-gray-800 shadow-xl md:shadow-none 
         `}>
    
-          <div className="h-full overflow-y-auto"> 
+          <div className={`h-full overflow-y-auto `}> 
              <ChatList 
                 selectedConv={selectedConv} 
                 setSelectedConv={(conv) => {
