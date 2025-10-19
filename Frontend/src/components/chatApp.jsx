@@ -72,7 +72,7 @@ const ChatApp = () => {
                 />
             ) : (
                
-                <div className="flex flex-1 flex-col items-center justify-center h-full bg-white dark:bg-gray-700">
+                <div className={`flex flex-1 flex-col items-center justify-center h-full ${Theme? "bg-gray-800" : "bg-white"} `}>
                     <div className="text-center space-y-6 p-8">
                         <div className="text-8xl animate-pulse text-purple-500">💬</div>
                         <div>

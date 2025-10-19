@@ -66,16 +66,22 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
                   onClick={() => setSelectedConv(conv)}
                   className={` mx-2 my-1 p-4 cursor-pointer rounded-xl transition-all duration-200 flex items-center gap-3 group ${
                     isSelected
-                      ? "bg-gradient-to-r from-purple-100 to-indigo-100 shadow-md border-l-4 border-purple-600"
-                      : "hover:bg-gray-100"
+                    ? Theme 
+                      ? "bg-gradient-to-r from-purple-100 to-indigo-100 shadow-md border-l-4 border-purple-600 "
+                      : "bg-gradient-to-r from-purple-100 to-indigo-100 shadow-md border-l-4 border-purple-600 text-purple-900"
+                      :  Theme 
+                      ? "hover:bg-gray-700 "
+                      : "hover: bg-gray-50"
                   } ` 
                 }
                 >
                   <div
                     className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md ${
-                      isSelected
-                        ? "bg-gradient-to-br from-purple-600 to-indigo-600"
-                        : "bg-gradient-to-br from-purple-400 to-indigo-400 group-hover:from-purple-500 group-hover:to-indigo-500"
+                      isSelected ?
+                      Theme
+                        ? "bg-gradient-to-br from-purple-600 to-indigo-600 text-white"
+                        : "bg-gradient-to-br from-purple-400 to-indigo-400 text-white"
+                        : "bg-gradient-to-br from-purple-400 to-indigo-400 group-hover:from-purple-500 group-hover:to-indigo-500 text-white"
                     }`}
                   >
                     {participant?.name?.charAt(0).toUpperCase() || "?"}
@@ -84,12 +90,24 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
                   <div className="flex-1 min-w-0">
                     <h3
                       className={`font-semibold text-base truncate ${
-                        isSelected ? "text-purple-900" : "text-black"
-                      } ${Theme? "text-white" : "text-black"}` }
+                        isSelected 
+                        ?Theme
+                        ?"text-black "
+                        : "text-purple-900 "
+                        : Theme
+                        ? "text-white"
+                        :"text-gray-900"
+                      }` }
                     >
                       {participant?.name || "Unknown"}
                     </h3>
-                    <p className="text-sm text-gray-500 truncate">
+                    <p className={`text-sm text-gray-500 truncate ${
+                      isSelected
+                      ? Theme
+                      ? "text-black"
+                      : "text-purple-700"
+                      : "text-gray-300"
+                    }`}>
                       Click to chat
                     </p>
                   </div>
