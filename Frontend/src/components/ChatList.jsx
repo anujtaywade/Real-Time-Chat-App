@@ -34,7 +34,7 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
 
   return (
     <div className={`flex flex-col h-full  ${Theme? "bg-gray-800 " : "bg-white"}`}>
-      <div className="p-5 bg-gradient-to-r from-purple-600 to-indigo-600 border-b border-purple-700">
+      <div className="p-6 bg-gradient-to-r from-purple-600 to-indigo-600 border-b border-purple-700">
         <h1 className="text-2xl font-bold text-white flex items-center gap-2">
           <span>💬</span>
           <span>Chats</span>

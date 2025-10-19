@@ -65,13 +65,13 @@ const Login = () => {
       
 
     
-      <img 
-        className={`size-56 absolute top-[5%] right-[20%] md:right-[12%] md:top-[-5%] lg:top-[20%] lg:right-[38%] transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-2' : 'opacity-0 -translate-y-6'
-        }`}
-        src="/gojo.png" 
-        alt="" 
-      />
+    <img 
+  className={`size-56 absolute top-[6%] right-[19%] md:right-[12%] md:top-[5%] lg:top-[-4%] lg:right-[42%] z-20 transition-all duration-1000 ${
+    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
+  }`}
+  src="/gojo.png" 
+  alt="" 
+/>
 
      
       <div 
