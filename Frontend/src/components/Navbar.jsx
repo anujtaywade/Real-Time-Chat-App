@@ -199,7 +199,7 @@ const Navbar = ({ Theme, setTheme, onMenuClick }) => {
                 onClick={() => {
                   setTheme(true) || setThemeOpen(false) || setOpen(false);
                 }}
-                className="flex items-center justify-between w-full px-5 py-4 mb-3 rounded-xl hover:bg-gray-800 hover:text-white transition-all shadow-md bg-gray-100 group"
+                className="flex items-center justify-between w-full px-5 py-4 mb-3 rounded-xl text-black hover:bg-gray-800 hover:text-white transition-all shadow-md bg-gray-100 group "
               >
                 <span className="font-medium">🌙 Dark Mode</span>
                 <div className="w-5 h-5 rounded-full bg-gray-800 group-hover:bg-white transition-colors"></div>
@@ -208,7 +208,7 @@ const Navbar = ({ Theme, setTheme, onMenuClick }) => {
                 onClick={() => {
                   setTheme(false) || setThemeOpen(false) || setOpen(false);
                 }}
-                className="flex items-center justify-between w-full px-5 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-md bg-gray-100 group"
+                className="flex items-center justify-between w-full px-5 py-4 rounded-xl text-black hover:bg-gray-800 hover:text-white transition-all shadow-md bg-gray-100 group"
               >
                 <span className="font-medium">☀️ Light Mode</span>
               </button>
