@@ -172,7 +172,7 @@ const Message = ({ conversation, Theme }) => {
               }
             }}
             placeholder="Type your message..."
-            className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+            className="flex-1 px-4 py-3 border-2  border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
           />
           <button
             onClick={handleSend}
