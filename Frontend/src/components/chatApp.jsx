@@ -4,12 +4,20 @@ import MessagePanel from "./MessagePanel";
 import Navbar from "./Navbar";
 import { useState , useEffect} from "react";
 import { Toaster } from "react-hot-toast";
+import cookie from 'js-cookie'
 
 const ChatApp = () => {
   const [selectedConv, setSelectedConv] = useState(null);
- 
-  const [Theme, setTheme] = useState(false); 
   const [showSidebar, setShowSidebar] = useState(true);
+  const [Theme, setTheme] = useState(()=>{
+    const savedTheme = cookie.get("theme")
+    return savedTheme === "true" 
+  }); 
+  
+
+  useEffect(() => {
+    cookie.set("theme", Theme?"true" : "false",{expires : 30})
+  }, [Theme]);
   
 
  

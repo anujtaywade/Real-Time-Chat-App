@@ -16,8 +16,8 @@ app.use(cookieParser())
 
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL,  // frontend URL
-  credentials: true,               // allow cookies to be sent
+  origin: process.env.CLIENT_URL, 
+  credentials: true,               
   methods: ["GET","POST","PUT","DELETE","OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 };
