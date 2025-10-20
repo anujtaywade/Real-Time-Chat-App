@@ -1,22 +1,24 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const message = require('../models/message');
 
 module.exports = function auth (req,res,next) {
-    const authHeader = req.headers.authorization
-
-    if(!authHeader || !authHeader.startsWith('Bearer')){
-        res.send(401).json({Message:"on token"})
-    }
-
-    const token = authHeader.split(' ')[1]
+   
 
     try {
+
+        const token = req.cookies.token;
+
+        if(!token){
+            return res.status(401).json({message:"no token provided"})
+        }
+
         const decoded = jwt.verify(token,process.env.JWT_SECRET)
 
         req.user = decoded
 
         next()
     } catch (error) {
-        console.log(error)
-        res.status(401).json({Message : "token is invalid "})
+        console.log(error.message)
+        return res.status(401).json({message : "token is invalid "})
     }
 }

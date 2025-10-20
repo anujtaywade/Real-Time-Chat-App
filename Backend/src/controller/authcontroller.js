@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require ("bcrypt")
 const user = require ('../models/user')
 const {nanoid} = require('nanoid')
+const message = require('../models/message')
 
 
 exports.signup = async (req,res) => {
@@ -20,12 +21,12 @@ exports.signup = async (req,res) => {
     }
 
 
-
+    const hashPassword = await bcrypt.hash(password,10);
     const uniqueID = nanoid(8) ;
 
-    const newUser = await user.create({name, email ,password})
+    const newUser = await user.create({name, email ,password:hashPassword ,uniqueID})
     res.status(201).json({
-        messge:"user created successfully",
+        message:"user created successfully",
         user :{
             id : newUser._id,
             name : newUser.name,
@@ -64,15 +65,21 @@ exports.login = async (req,res) => {
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES}
         )
+
+        res.cookie("token",token,{
+            httpOnly : true,
+            secure : process.env.NODE_ENV === "production",
+            sameSite : "lax",
+            maxAge : 7 * 24 * 60 * 60 * 1000
+        })
         res.status(200).json({message : "login successful",
-            token,
              user:{
-                id:existingUser._id,
-                email:existingUser.email,
-                name:existingUser.name,
-                createdAt : existingUser.createdAt,
-                uniqueID :existingUser.uniqueID
-            }
+                id: existingUser._id,
+    name: existingUser.name,
+    email: existingUser.email,
+    uniqueID: existingUser.uniqueID,
+    createdAt: existingUser.createdAt
+             },
         })
     
 
@@ -86,20 +93,31 @@ exports.login = async (req,res) => {
 
 exports.logout=async (req,res) => {
     try {
-        res.status(401).json({message:"logout successful"})
+        res.clearCookie("token",{
+            httpOnly : true,
+            secure : process.env.NODE_ENV === "production",
+            sameSite : "lax",
+        })
+        res.status(200).json({message:"logout successful"})
 
     } catch (error) {
         console.log(error)
-        res.status(201).json({message:"server error"})
+        res.status(500).json({message:"server error"})
     }
 }
 
+exports.verifyUser = async (req,res) => {
+    res.json({user : req.user})
+}
+
+
 exports.profile= async (req,res) => {
     try {
-        res.json({
+        res.status(200).json({
             message:"you are authorised",
             user:req.user,
         })
+
 
     } catch (error) {
         console.log(error,"cannot access profile")
