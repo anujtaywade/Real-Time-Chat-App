@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from 'react-router-dom';
 import { AtSign , LockKeyhole  } from "lucide-react";
-import api from '../api/axios'
+
 
 const Login = () => {
   const { login } = useContext(AuthContext)
@@ -27,9 +27,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/auth/login", { email, password })
-      console.log(res.data)
-      login(res.data)
+      await login( email, password )
       navigate("/chat")
     } catch (error) {
       seterror(error.response?.data?.error ||

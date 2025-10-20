@@ -55,8 +55,11 @@ const ChatList = ({ selectedConv, setSelectedConv, Theme }) => {
         ) : allConversation.length > 0 ? (
           <div className="py-2">
             {allConversation.map((conv) => {
+              if (!conv || !conv.participants || !Array.isArray(conv.participants)) {
+                return null;
+              }
               const participant = conv.participants.find(
-                (p) => p._id !== User.id
+                (p) => p?._id !== User?.id
               );
               const isSelected = selectedConv?.uniqueKey === conv.uniqueKey;
 
