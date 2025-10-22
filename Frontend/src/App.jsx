@@ -1,5 +1,5 @@
 import Signup from "./pages/Signup.jsx";
-import Login from "./pages/login.jsx";
+import Login from "./pages/Login.jsx";
 import ChatApp from './components/ChatApp.jsx';
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
