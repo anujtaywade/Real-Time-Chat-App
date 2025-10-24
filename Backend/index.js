@@ -15,15 +15,18 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(cookieParser())
 
-const corsOptions = {
-  origin: process.env.CLIENT_URL, 
+app.use(cors({
+  origin: process.env.CLIENT_URL,  
   credentials: true,               
-  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-};
-app.use(cors(corsOptions))
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Cookie"], 
+  exposedHeaders: ["Set-Cookie"], 
+}));
+
+
 app.use((req, res, next) => {
-  console.log("Request Origin:", req.headers.origin);
+ console.log("Request Origin:", req.headers.origin);
+  console.log("Cookies:", req.cookies);
   next();
 });
 
