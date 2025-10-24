@@ -52,7 +52,7 @@ const LandingPage = () => {
       <nav className="relative z-50 flex justify-between items-center px-8 md:px-16 py-6">
         <div className="flex items-center gap-3">
          
-          <span className="text-5xl font-bold font-mono text-white">Zoroa</span>
+          <span className="text-3xl font-bold font-mono text-white">Zoroa</span>
         </div>
         
         <div className="hidden md:flex items-center gap-8">
