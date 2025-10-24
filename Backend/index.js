@@ -12,6 +12,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
+app.use(express.json());
 app.use(cookieParser())
 
 const corsOptions = {
@@ -21,6 +22,11 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"]
 };
 app.use(cors(corsOptions))
+app.use((req, res, next) => {
+  console.log("Request Origin:", req.headers.origin);
+  next();
+});
+
 
 
 const io = new Server(server, {
@@ -61,7 +67,7 @@ socket.on("sendMessage", (data) => {
 
 
 
-app.use(express.json());
+
 
 
 
