@@ -11,8 +11,9 @@ export const SocketProvider= ({children}) => {
   const [Socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:7000",{
-      transports:["websocket"]
+    const newSocket = io(import.meta.env.VITE_BACKEND_URL,{
+      transports:["websocket"],
+      withCredentials : true
     })
     setSocket(newSocket)
 
