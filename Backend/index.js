@@ -68,11 +68,6 @@ socket.on("sendMessage", (data) => {
 });
 
 
-
-
-
-
-
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
