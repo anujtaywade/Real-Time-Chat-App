@@ -5,34 +5,33 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [User, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // ✅ Check login via COOKIE on page refresh
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = localStorage.getItem('token'); 
-        if (token) {
-          const res = await api.get("/auth/me");
-          setUser(res.data.user);
-        }
+        const res = await api.get("/auth/me"); // cookie auto sent
+        setUser(res.data.user);
       } catch (error) {
         setUser(null);
-        localStorage.removeItem('token'); 
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchUser();
   }, []);
 
+  // ✅ COOKIE BASED LOGIN ONLY
   const login = async (email, password) => {
     try {
-      const response = await api.post("/auth/login", { email, password });
-      
-      
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-      }
-      
+      await api.post("/auth/login", { email, password });
+
+      // after login, fetch user using cookie
       const res = await api.get("/auth/me");
       setUser(res.data.user);
+
     } catch (error) {
       console.log("login failed", error);
       setUser(null);
@@ -40,22 +39,19 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  // ✅ COOKIE BASED LOGOUT ONLY
   const logout = async () => {
     try {
-      await api.post("/auth/logout", {});
-      
-      
-      localStorage.removeItem('token');
-      
+      await api.post("/auth/logout");
       setUser(null);
     } catch (error) {
       console.log("logout error", error);
-      localStorage.removeItem('token'); 
+      setUser(null);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ User, login, logout }}>
+    <AuthContext.Provider value={{ User, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
