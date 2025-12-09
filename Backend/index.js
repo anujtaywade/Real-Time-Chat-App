@@ -16,12 +16,17 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,  
+  origin: "https://real-time-chat-app-r51u.vercel.app",  
   credentials: true,               
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"], 
    
 }));
+
+app.options("*",cors({
+  origin : "https://real-time-chat-app-r51u.vercel.app",
+  credentials : true
+}))
 
 
 app.use((req, res, next) => {

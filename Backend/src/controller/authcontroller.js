@@ -72,13 +72,13 @@ exports.login = async (req, res) => {
         uniqueID: existingUser.uniqueID,
       },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES || "7d" } // FAILSAFE
+      { expiresIn: process.env.JWT_EXPIRES || "7d" } 
     );
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,        // REQUIRED FOR HTTPS (Render)
-      sameSite: "none",    // REQUIRED FOR CROSS-DOMAIN
+      secure: true,       
+      sameSite: "None",    
       maxAge: 7 * 24 * 60 * 60 * 1000,
       path: "/",
     });
