@@ -23,12 +23,6 @@ app.use(cors({
    
 }));
 
-app.options("*",cors({
-  origin : "https://real-time-chat-app-r51u.vercel.app",
-  credentials : true
-}))
-
-
 app.use((req, res, next) => {
  console.log("Request Origin:", req.headers.origin);
   console.log("Cookies:", req.cookies);
