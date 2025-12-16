@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = function auth(req, res, next) {
   try {
-    const token = req.cookies.token;   // ✅ ONLY cookies (no headers)
+    const token = req.cookies.token;   
 
     if (!token) {
       return res.status(401).json({ message: "No token found in cookies" });
@@ -10,7 +10,7 @@ module.exports = function auth(req, res, next) {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = decoded;   // ✅ attach user id
+    req.user = decoded;   
     next();
 
   } catch (error) {
