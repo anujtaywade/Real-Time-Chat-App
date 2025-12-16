@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: "https://real-time-chat-app-r51u.vercel.app",
     methods: ["GET", "POST"],
   }
 });
