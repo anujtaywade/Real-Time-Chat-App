@@ -97,7 +97,7 @@ const AddFriend = ({ UserId }) => {
               value={FriendId}
               onChange={(e) => setFriendId(e.target.value)}
               placeholder="Enter Zoroa ID"
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-sm mb-4 transition-all"
+              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-sm mb-4 transition-all "
             />
 
             <div className="flex gap-2">

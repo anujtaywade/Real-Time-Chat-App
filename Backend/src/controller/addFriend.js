@@ -5,7 +5,7 @@ const user = require("../models/user")
 
 exports.addFriend = async (req,res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.user.id;
 
         const Friend = await user.findOne({
             uniqueID : req.body.friendUniqueId 
