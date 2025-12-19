@@ -77,7 +77,7 @@ const AddFriend = ({ UserId }) => {
     rounded-t-2xl md:rounded-2xl
     shadow-2xl p-5
     z-50 animate-fadeIn
-    md:absolute md:right-32 md:top-16 md:w-72
+    md:absolute md:right-32 md:top-14 md:w-72
 ">
             <div className="flex justify-between items-center mb-1">
               <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
