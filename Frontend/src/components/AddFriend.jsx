@@ -65,7 +65,7 @@ const AddFriend = ({ UserId }) => {
           onClick={() => {
             setAddFriendOpen((prev) => !prev);
           }}
-          className="absolute right-28 top-4 text-3xl text-white hover:text-gray-200 transition-all duration-200 hover:scale-110"
+          className="absolute right-22 md:right-28 top-4 text-3xl text-white hover:text-gray-200 transition-all duration-200 hover:scale-110"
         >
           <IoPersonAddSharp />
         </button>
@@ -79,7 +79,7 @@ const AddFriend = ({ UserId }) => {
     z-50 animate-fadeIn
     md:absolute md:right-32 md:top-16 md:w-72
 ">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-1">
               <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Add Friend
               </h3>
