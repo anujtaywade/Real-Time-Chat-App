@@ -7,12 +7,13 @@ export const AuthContextProvider = ({ children }) => {
   const [User, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Check login via COOKIE on page refresh
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get("/auth/me"); // cookie auto sent
+        const res = await api.get("/auth/me");
         setUser(res.data.user);
+        console.log("User state:", User);
       } catch (error) {
         setUser(null);
       } finally {
@@ -23,12 +24,12 @@ export const AuthContextProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-  // ✅ COOKIE BASED LOGIN ONLY
+
   const login = async (email, password) => {
     try {
       await api.post("/auth/login", { email, password });
 
-      // after login, fetch user using cookie
+    
       const res = await api.get("/auth/me");
       setUser(res.data.user);
 
@@ -39,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  // ✅ COOKIE BASED LOGOUT ONLY
+ 
   const logout = async () => {
     try {
       await api.post("/auth/logout");

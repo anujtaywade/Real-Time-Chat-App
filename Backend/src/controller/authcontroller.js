@@ -48,6 +48,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     console.log("LOGIN BODY:", req.body);
+    console.log()
     const { email, password } = req.body;
     
 
@@ -121,7 +122,19 @@ exports.logout=async (req,res) => {
 }
 
 exports.verifyUser = async (req,res) => {
-    res.json({user : req.user})
+  try {
+    const existingUser = await user.findById(req.user.id);
+
+    res.status(200).json({
+      user : existingUser._id,
+      name : existingUser._id,
+      email : existingUser._id,
+      uniqueID : existingUser._id,
+      createdAt : existingUser._id,
+    })
+  } catch (error) {
+    res.status(401).json({message:"unauthorized user"})
+  }
 }
 
 

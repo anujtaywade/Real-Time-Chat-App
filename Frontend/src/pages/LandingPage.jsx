@@ -80,7 +80,7 @@ const LandingPage = () => {
 
          
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            Find your nearest
+            Find your
             <span className="block mt-2 bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200 bg-clip-text text-transparent animate-pulse">
               mate
             </span>
