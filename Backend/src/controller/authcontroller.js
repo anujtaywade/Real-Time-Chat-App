@@ -122,19 +122,8 @@ exports.logout=async (req,res) => {
 }
 
 exports.verifyUser = async (req,res) => {
-  try {
-    const existingUser = await user.findById(req.user.id);
+  res.json({user : req.user})
 
-    res.status(200).json({
-      user : existingUser._id,
-      name : existingUser._id,
-      email : existingUser._id,
-      uniqueID : existingUser._id,
-      createdAt : existingUser._id,
-    })
-  } catch (error) {
-    res.status(401).json({message:"unauthorized user"})
-  }
 }
 
 
