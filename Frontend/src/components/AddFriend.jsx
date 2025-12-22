@@ -1,5 +1,5 @@
 
-import api from "axios";
+import api from "../api/axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import { IoPersonAddSharp } from "react-icons/io5";
@@ -9,14 +9,14 @@ const AddFriend = ({ UserId }) => {
   const [AddFriendOpen, setAddFriendOpen] = useState(false);
   const [FriendId, setFriendId] = useState("");
   const [Loading, setLoading] = useState(false);
-  const [Message, setMessage] = useState("");
+  // const [Message, setMessage] = useState("");
 
-  useEffect(() => {
-    if (Message) {
-      const timer = setTimeout(() => toast.success(""), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [Message]);
+  // useEffect(() => {
+  //   if (Message) {
+  //     const timer = setTimeout(() => toast.success(""), 3000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [Message]);
 
   const handleAddFriend = async () => {
     if (!FriendId.trim()) {
@@ -31,14 +31,13 @@ const AddFriend = ({ UserId }) => {
 
     try {
       setLoading(true);
-      const addFriendURL = import.meta.env.VITE_ADDFRIEND_URL;
+      
       const res = await api.post(
-        `${addFriendURL}`,
+        import.meta.env.VITE_ADDFRIEND_URL,
         { friendUniqueId: FriendId },
-        { withCredentials: true }
       );
-      console.log(`${addFriendURL}/${UserId}`);
-      toast.success(res.data.Message || "Friend added successfully");
+     
+      toast.success(res.data.message || "Friend added successfully");
       setFriendId("");
       setAddFriendOpen(false);
     } catch (error) {
@@ -125,7 +124,7 @@ const AddFriend = ({ UserId }) => {
             </div>
           </div>
         )}
-        {Message && <p className="text-xs mt-2 text-gray-700 text-center">{Message}</p>}
+       
       </div>
     </div>
   );
